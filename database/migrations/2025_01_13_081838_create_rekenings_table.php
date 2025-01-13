@@ -14,8 +14,12 @@ return new class extends Migration
         Schema::create('rekening', function (Blueprint $table) {
             $table->id();
             $table->integer('rekening_id');
-            $table->foreignId('supplier_id');
-            $table->foreignId('bank_id');
+            $table->foreignId('supplier_id')->constrained(
+                table:'supplier',column:'supplier_id', indexName:'rekening_supplier_id'
+            );
+            $table->foreignId('bank_id')->constrained(
+                table:'bank', column:'bank_id', indexName:'rekening_bank_id'
+            );
             $table->string('nomor_rekening');
             $table->timestamps();
         });
