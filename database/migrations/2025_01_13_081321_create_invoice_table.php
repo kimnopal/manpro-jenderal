@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('no_invoice');
             $table->string('client');
+            $table->date('tanggal');
             $table->string('catatan');
             $table->timestamps();
         });

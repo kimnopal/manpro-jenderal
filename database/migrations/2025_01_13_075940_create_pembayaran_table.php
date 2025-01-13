@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('pembayaran', function (Blueprint $table) {
             $table->id();
-            $table->string('id_proyek');
+            $table->integer('id_proyek');
             $table->enum('status', ['paid', 'unpaid', 'pending'])->default('unpaid');
             $table->integer('nominal');
-            $table->integer('kode_pembayaran');
+            $table->string('kode_pembayaran');
             $table->timestamps();
         });
     }
