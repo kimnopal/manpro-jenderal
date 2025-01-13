@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('proyek', function (Blueprint $table) {
             $table->id();
+            $table->string('no_proyek')->unique();
+            $table->date('tgl_mulai_kontrak');
+            $table->date('tgl_selesai_kontrak');
+            $table->unsignedBigInteger('klien_id');
+            $table->date('termin');
+            $table->decimal('biaya', 15, 2)->default(0);
+            $table->decimal('pajak', 15, 2)->default(0);
+            $table->decimal('biaya_lain', 15, 2)->default(0);
             $table->timestamps();
         });
     }
