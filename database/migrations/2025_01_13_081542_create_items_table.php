@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->integer('item_id');
             $table->string('nama_item');
-            $table->foreignId('satuan_id')->constrained(
+            $table->foreignId('satuan_id')->nullable()->constrained(
                 table:'satuan', column:'satuan_id', indexName:'item_satuan_id'
-            );
+            )->nullOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }
