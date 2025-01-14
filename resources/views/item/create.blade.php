@@ -11,13 +11,9 @@
         <label for="satuan_id" class="form-label mt-3">Satuan item : </label>
         <select class="form-select mt-2" aria-label="Default select example" name="satuan_id" id="satuan_id" required>
             <option selected disabled>Pilih Satuan</option>
-            <option value="1">Satuan</option>
-            <option value="2">Puluhan</option>
-            <option value="3">Ratusan</option>
-            <option value="4">Ribuan</option>
-            <option value="5">Puluh Ribuan</option>
-            <option value="6">Ratus Ribuan</option>
-            <option value="7">Jutaan</option>
+            @foreach ($data_satuan as $satuan)
+                <option value="{{ $satuan->satuan_id }}">{{ $satuan->nama_satuan }}</option>
+            @endforeach
           </select>
         {{-- <input type="text" name="satuan_id" id="satuan_id" class="form-control mt-2" required> --}}
         <button class="btn btn-success mt-3"><i class="fa-solid fa-arrow-up-from-bracket"></i> Tambah item</button>

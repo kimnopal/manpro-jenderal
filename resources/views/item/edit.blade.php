@@ -13,14 +13,10 @@
         <input type="text" name="nama_item" id="nama_item" class="form-control mt-2" autofocus required value="{{ $item->nama_item }}">
         <label for="satuan_id" class="form-label mt-3">Satuan Item : </label>
         <select class="form-select mt-2" name="satuan_id" id="satuan_id" aria-label="Default select example" required>
-            <option selected disabled>{{ $item->satuan->nama_satuan ?? "Pilih Satuan"}}</option>
-            <option value="1">Satuan</option>
-            <option value="2">Puluhan</option>
-            <option value="3">Ratusan</option>
-            <option value="4">Ribuan</option>
-            <option value="5">Puluh Ribuan</option>
-            <option value="6">Ratus Ribuan</option>
-            <option value="7">Jutaan</option>
+            <option selected disabled >{{ $item->satuan->nama_satuan ?? "Pilih Satuan"}}</option>
+            @foreach ($data_satuan as $satuan)
+                <option value="{{ $satuan->satuan_id }}">{{ $satuan->nama_satuan }}</option>
+            @endforeach
         </select>
         <button class="btn btn-success mt-3"><i class="fa-solid fa-save"></i> Simpan Perubahan</button>
     </form>

@@ -72,9 +72,11 @@ class MasterController extends Controller
     }
 
     public function create_item() {
-        
+        $data_satuan = Satuan::all();
+
         return \view('item.create', [
-            'judul_create_item' => 'Tambah Data Item'
+            'judul_create_item' => 'Tambah Data Item',
+            'data_satuan' => $data_satuan,
         ]);
     }
 
@@ -89,15 +91,21 @@ class MasterController extends Controller
     }
 
     public function edit_item($id) {
-        $data_item = Item::find($id);
+        $data_satuan = Satuan::all();
+        $item = Item::find($id);
 
         return \view('item.edit', [
             'judul_edit_item' => 'Edit Data Item',
-            'item' => $data_item,
+            'item' => $item,
+            'data_satuan' => $data_satuan,
         ]);
     }
 
     public function update_item(Request $request, $id) : RedirectResponse {
+        // $satuanExists = Satuan::where('satuan_id', $request->satuan_id)->exists();
+        // if (!$satuanExists) {
+        //     return redirect()->back()->withErrors(['satuan_id' => 'Satuan Item tidak valid']);
+        // }
         $item = Item::find($id);
         $item->nama_item = $request->nama_item;
         $item->satuan_id = $request->satuan_id;
