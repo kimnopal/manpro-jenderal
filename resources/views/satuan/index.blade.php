@@ -7,7 +7,6 @@
         <thead class="table-success">
             <th>No</th>
             <th>Nama Satuan</th>
-            <th>ID Satuan</th>
             <th>Action</th>
         </thead>
         <tbody class="table-group-divider">
@@ -15,7 +14,6 @@
                 <tr>
                     <td>{{ $no++ }}</td>
                     <td>{{ $satuan->nama_satuan }}</td>
-                    <td>{{ $satuan->satuan_id }}</td>
                     <td class="d-flex flex-row">
                         <a href="{{ route('satuan.edit', $satuan->id) }}" class="btn btn-warning btn-sm"><i class="fa-solid fa-edit"></i> Edit</a>
                         <form action="{{ route('satuan.delete', $satuan->id) }}" method="POST" class="m-auto">

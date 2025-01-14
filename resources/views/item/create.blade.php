@@ -10,9 +10,9 @@
         <input type="text" name="nama_item" id="nama_item" class="form-control mt-2" autofocus required>
         <label for="satuan_id" class="form-label mt-3">Satuan item : </label>
         <select class="form-select mt-2" aria-label="Default select example" name="satuan_id" id="satuan_id" required>
-            <option selected disabled>Pilih Satuan</option>
+            <option value="" selected disabled>Pilih Satuan</option>
             @foreach ($data_satuan as $satuan)
-                <option value="{{ $satuan->satuan_id }}">{{ $satuan->nama_satuan }}</option>
+                <option value="{{ $satuan->id }}">{{ $satuan->nama_satuan }}</option>
             @endforeach
           </select>
         {{-- <input type="text" name="satuan_id" id="satuan_id" class="form-control mt-2" required> --}}

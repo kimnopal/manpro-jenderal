@@ -8,8 +8,6 @@
         @csrf
         <label for="nama_satuan" class="form-label">Nama Satuan : </label>
         <input type="text" name="nama_satuan" id="nama_satuan" class="form-control mt-2" autofocus required>
-        <label for="satuan_id" class="form-label mt-3">ID Satuan : </label>
-        <input type="text" name="satuan_id" id="satuan_id" class="form-control mt-2" required>
         <button class="btn btn-success mt-3"><i class="fa-solid fa-arrow-up-from-bracket"></i> Tambah Satuan</button>
     </form>
 </x-app-layout>

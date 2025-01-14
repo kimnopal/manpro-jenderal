@@ -29,7 +29,6 @@ class MasterController extends Controller
 
     public function save_satuan(Request $request) : RedirectResponse {
         $satuan = new Satuan();
-        $satuan->satuan_id = $request->satuan_id;
         $satuan->nama_satuan = $request->nama_satuan;
         $satuan->save();
 
@@ -48,7 +47,6 @@ class MasterController extends Controller
     public function update_satuan(Request $request, $id) : RedirectResponse {
         $satuan = Satuan::find($id);
         $satuan->nama_satuan = $request->nama_satuan;
-        $satuan->satuan_id = $request->satuan_id;
         $satuan->save();
 
         return Redirect::route('satuan.index');
@@ -84,7 +82,6 @@ class MasterController extends Controller
         $item = new Item();
         $item->nama_item = $request->nama_item;
         $item->satuan_id = $request->satuan_id;
-        $item->item_id = $request->satuan_id;
         $item->save();
 
         return Redirect::route('item.index');
@@ -102,10 +99,6 @@ class MasterController extends Controller
     }
 
     public function update_item(Request $request, $id) : RedirectResponse {
-        // $satuanExists = Satuan::where('satuan_id', $request->satuan_id)->exists();
-        // if (!$satuanExists) {
-        //     return redirect()->back()->withErrors(['satuan_id' => 'Satuan Item tidak valid']);
-        // }
         $item = Item::find($id);
         $item->nama_item = $request->nama_item;
         $item->satuan_id = $request->satuan_id;
