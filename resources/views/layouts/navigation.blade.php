@@ -22,8 +22,12 @@
                         Daftar Tabel
                     </a>
                     <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{ route('client.index') }}">Tabel Client</a></li>
                         <li><a class="dropdown-item" href="{{ route('satuan.index') }}">Tabel Satuan</a></li>
                         <li><a class="dropdown-item" href="{{ route('item.index') }}">Tabel Item</a></li>
+                        <li><a class="dropdown-item" href="{{ route('bank.index') }}">Tabel Bank</a></li>
+                        <li><a class="dropdown-item" href="{{ route('supplier.index') }}">Tabel Supplier</a></li>
+                        <li><a class="dropdown-item" href="{{ route('rekening.index') }}">Tabel Rekening</a></li>
                         <li><a class="dropdown-item" href="#">Action</a></li>
                     </ul>
                 </li>

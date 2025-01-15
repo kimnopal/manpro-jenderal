@@ -14,7 +14,11 @@ return new class extends Migration
         Schema::create('item', function (Blueprint $table) {
             $table->id();
             $table->string('nama_item');
-            $table->foreignId('satuan_id')->nullable()->constrained('satuan')->nullOnDelete()->cascadeOnUpdate();
+            $table->foreignId('satuan_id')
+                    ->nullable()
+                    ->constrained('satuan')
+                    ->nullOnDelete()
+                    ->cascadeOnUpdate();
             $table->timestamps();
         });
     }
