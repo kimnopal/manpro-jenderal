@@ -11,9 +11,9 @@
             <th>Action</th>
         </thead>
         <tbody class="table-group-divider">
-            @foreach ($data_item as $no => $item)
+            @foreach ($data_item as $item)
                 <tr>
-                    <td>{{ $no++ }}</td>
+                    <td>{{ $loop->iteration }}</td>
                     <td>{{ $item->nama_item }}</td>
                     <td>
                         @if($item->satuan_id)

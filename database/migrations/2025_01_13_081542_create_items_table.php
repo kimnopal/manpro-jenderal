@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('nama_item');
             $table->foreignId('satuan_id')
-                    ->nullable()
+                    // ->nullable(
                     ->constrained('satuan')
-                    ->nullOnDelete()
+                    // ->nullOnDelete()
                     ->cascadeOnUpdate();
             $table->timestamps();
         });

@@ -17,9 +17,9 @@
                 {{ $rekening->supplier->nama_supplier ?? "Pilih Supplier" }}
             </option>
             @foreach ($data_supplier as $supplier)
-                <option 
+                <option value="{{ $supplier->id }}"
                     @if ($rekening->supplier_id == $supplier->id) hidden @endif
-                    @disabled((App\Models\Rekening::where('supplier_id', $supplier->id)->exists()) ?? False) value="{{ $supplier->id }}"
+                    {{-- @disabled((App\Models\Rekening::where('supplier_id', $supplier->id)->exists()) ?? False) value="{{ $supplier->id }}" --}}
                     >
                     {{ $supplier->nama_supplier }}
                 </option>
@@ -31,9 +31,9 @@
                 {{ $rekening->bank->nama_bank ?? "Pilih Bank"}}
             </option>
             @foreach ($data_bank as $bank)
-                <option 
+                <option value="{{ $bank->id }}"
                 @if ($rekening->bank_id == $bank->id) hidden @endif
-                @disabled(($bank->id == $rekening->bank_id) ?? False) value="{{ $bank->id }}"
+                {{-- @disabled(($bank->id == $rekening->bank_id) ?? False) value="{{ $bank->id }}" --}}
                 >
                     {{ $bank->nama_bank }}</option>
             @endforeach

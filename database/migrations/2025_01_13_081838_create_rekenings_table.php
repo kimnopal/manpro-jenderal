@@ -14,15 +14,15 @@ return new class extends Migration
         Schema::create('rekening', function (Blueprint $table) {
             $table->id();
             $table->foreignId('supplier_id')
-                    ->unique()
-                    ->nullable()
+                    // ->unique()
+                    // ->nullable()
                     ->constrained('supplier')
-                    ->nullOnDelete()
+                    // ->nullOnDelete()
                     ->cascadeOnUpdate();
             $table->foreignId('bank_id')
-                    ->nullable()
+                    // ->nullable()
                     ->constrained('bank')
-                    ->nullOnDelete()
+                    // ->nullOnDelete()
                     ->cascadeOnUpdate();
             $table->string('nomor_rekening');
             $table->timestamps();

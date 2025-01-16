@@ -12,9 +12,9 @@
             <th>Aksi</th>
         </thead>
         <tbody class="table-group-divider">
-            @foreach ($data_rekening as $no => $rekening)
+            @foreach ($data_rekening as $rekening)
                 <tr>
-                    <td>{{ $no++ }}</td>
+                    <td>{{ $loop->iteration }}</td>
                     <td>
                         @if ($rekening->supplier_id)
                             {{ $rekening->supplier->nama_supplier }}

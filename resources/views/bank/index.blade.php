@@ -10,9 +10,9 @@
             <th>Action</th>
         </thead>
         <tbody class="table-group-divider">
-            @foreach ($data_bank as $no => $bank)
+            @foreach ($data_bank as $bank)
                 <tr>
-                    <td>{{ $no++ }}</td>
+                    <td>{{ $loop->iteration }}</td>
                     <td>{{ $bank->nama_bank }}</td>
                     <td class="d-flex flex-row">
                         <a href="{{ route('bank.edit', $bank->id) }}" class="btn btn-warning btn-sm"><i class="fa-solid fa-edit"></i> Edit</a>

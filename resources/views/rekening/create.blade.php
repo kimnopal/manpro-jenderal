@@ -12,9 +12,9 @@
         <select name="supplier_id" id="supplier_id" class="form-select mt-2" required>
             <option value="" selected disabled>Pilih Supplier</option>
             @foreach ($data_supplier as $supplier)
-                <option value="{{ $supplier->id }}" 
+                <option value="{{ $supplier->id }}">
                     {{-- @disabled(optional($supplier->rekening)->supplier_id && $supplier->id == optional($supplier->rekening)->supplier_id)> --}}
-                    @disabled(($supplier->rekening) ? ($supplier->rekening->supplier_id==$supplier->id) : False)>
+                    {{-- @disabled(($supplier->rekening) ? ($supplier->rekening->supplier_id == $supplier->id) : False) --}}
                     {{ $supplier->nama_supplier }}
                 </option>
             @endforeach

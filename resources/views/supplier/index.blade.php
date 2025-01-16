@@ -12,9 +12,9 @@
             <th>Action</th>
         </thead>
         <tbody class="table-group-divider">
-            @foreach ($data_supplier as $no => $supplier)
+            @foreach ($data_supplier as $supplier)
                 <tr>
-                    <td>{{ $no++ }}</td>
+                    <td>{{ $loop->iteration }}</td>
                     <td>{{ $supplier->nama_supplier }}</td>
                     <td>{{ $supplier->alamat_supplier }}</td>
                     <td>{{ $supplier->kontak_supplier }}</td>
