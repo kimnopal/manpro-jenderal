@@ -44,6 +44,30 @@ Route::middleware('auth')->group(function () {
     Route::put('/satuan/update/{id}', [MasterController::class, 'update_satuan'])->name('satuan.update');
     Route::delete('/satuan/delete/{id}', [MasterController::class, 'delete_satuan'])->name('satuan.delete');
 
+    // Crud Bank
+    Route::get('/bank', [MasterController::class, 'index_bank'])->name('bank.index');
+    Route::get('/bank/tambah', [MasterController::class, 'create_bank'])->name('bank.create');
+    Route::post('/bank/save', [MasterController::class, 'save_bank'])->name('bank.save');
+    Route::get('/bank/edit/{id}', [MasterController::class, 'edit_bank'])->name('bank.edit');
+    Route::put('/bank/update/{id}', [MasterController::class, 'update_bank'])->name('bank.update');
+    Route::delete('/bank/delete/{id}', [MasterController::class, 'delete_bank'])->name('bank.delete');
+
+    // Crud Supplier
+    Route::get('/supplier', [MasterController::class, 'index_supplier'])->name('supplier.index');
+    Route::get('/supplier/tambah', [MasterController::class, 'create_supplier'])->name('supplier.create');
+    Route::post('/supplier/save', [MasterController::class, 'save_supplier'])->name('supplier.save');
+    Route::get('/supplier/edit/{id}', [MasterController::class, 'edit_supplier'])->name('supplier.edit');
+    Route::put('/supplier/update/{id}', [MasterController::class, 'update_supplier'])->name('supplier.update');
+    Route::delete('/supplier/delete/{id}', [MasterController::class, 'delete_supplier'])->name('supplier.delete');
+
+    // Crud Rekening
+    Route::get('/rekening', [MasterController::class, 'index_rekening'])->name('rekening.index');
+    Route::get('/rekening/tambah', [MasterController::class, 'create_rekening'])->name('rekening.create');
+    Route::post('/rekening/save', [MasterController::class, 'save_rekening'])->name('rekening.save');
+    Route::get('/rekening/edit/{id}', [MasterController::class, 'edit_rekening'])->name('rekening.edit');
+    Route::put('/rekening/update/{id}', [MasterController::class, 'update_rekening'])->name('rekening.update');
+    Route::delete('/rekening/delete/{id}', [MasterController::class, 'delete_rekening'])->name('rekening.delete');
+
     //CRUD Pembelian
     Route::get('/pembelian', [MasterController::class, 'pembelian_main'])->name('pembelian.pembelian-index');
     Route::get('/pembelian/create-pembelian', [MasterController::class, 'pembelian_create'])->name('pembelian.create-pembelian');

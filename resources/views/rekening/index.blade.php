@@ -9,7 +9,7 @@
             <th>Supplier Pemilik Rekening</th>
             <th>Nama Bank</th>
             <th>Nomor Rekening</th>
-            <th>Aksi</th>
+            <th width="15%">Aksi</th>
         </thead>
         <tbody class="table-group-divider">
             @foreach ($data_rekening as $rekening)
@@ -31,7 +31,7 @@
                     </td>
                     <td>{{ $rekening->nomor_rekening }}</td>
                     <td class="d-flex justify-content-between">
-                        <a href="{{ route('rekening.edit', $rekening->id) }}" class="btn btn-warning btn-sm mx-auto"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
+                        <a href="{{ route('rekening.edit', $rekening->id) }}" class="btn btn-warning btn-sm"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
                         <form action="{{ route('rekening.delete', $rekening->id) }}" method="POST">
                             @method('delete')
                             @csrf
@@ -42,4 +42,5 @@
             @endforeach
         </tbody>
     </table>
+    {{ $data_rekening->links() }}
 </x-app-layout>

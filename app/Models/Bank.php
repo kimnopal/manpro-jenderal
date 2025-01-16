@@ -12,7 +12,7 @@ class Bank extends Model
 
     protected $table = 'bank';
 
-    public function rekening() : HasMany {
+    public function rekenings() : HasMany {
         
         return $this->hasMany(Rekening::class, 'bank_id');
     }

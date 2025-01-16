@@ -30,6 +30,9 @@
                         <li><a class="dropdown-item" href="{{ route('rekening.index') }}">Tabel Rekening</a></li>
                     </ul>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('pembelian.pembelian-index') }}">Pembelian</a>
+                </li>
             </ul>
         </div>
     </div>

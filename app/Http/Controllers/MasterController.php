@@ -173,10 +173,11 @@ class MasterController extends Controller
     }
 
     //Pembelian 
-    public function pembelian_main(){
+    public function pembelian_main() {
         $data_pembelian = pembelian::all();
+
         return \view('pembelian.pembelian-index',[
-        'judul_pembelian_index' => 'List Data Satuan',
+        'judul_pembelian_index' => 'List Data Pembelian',
         'data_pembelian' => $data_pembelian,
         ]);
     }
@@ -328,7 +329,7 @@ class MasterController extends Controller
 
     // Controller Rekening
     public function index_rekening() {
-        $data_rekening = Rekening::all();
+        $data_rekening = Rekening::paginate(3);
 
         return \view('rekening.index', [
             'judul_index_rekening' => 'List Data Rekening',

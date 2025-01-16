@@ -9,11 +9,11 @@ class pembelian extends Model
 {
     use HasFactory;
     protected $table = 'pembelian';
-    protected $fillable = ['nama_satuan'];
-    public function item() : HasMany {
-        return $this->hasMany(Item::class, 'proyekid',);
-    }
-    public function item2() : HasMany {
-        return $this->hasMany(Item::class, 'satuanid',);
-    }
+    // protected $fillable = ['nama_satuan'];
+    // public function item() : HasMany {
+    //     return $this->hasMany(Item::class, 'proyekid',);
+    // }
+    // public function item2() : HasMany {
+    //     return $this->hasMany(Item::class, 'satuanid',);
+    // }
 }

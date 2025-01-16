@@ -9,7 +9,7 @@
             <th>Nama client</th>
             <th>Alamat client</th>
             <th>Kontak client</th>
-            <th>Action</th>
+            <th width="15%">Action</th>
         </thead>
         <tbody class="table-group-divider">
             @foreach ($data_client as $client)
@@ -18,9 +18,9 @@
                     <td>{{ $client->nama_client }}</td>
                     <td>{{ $client->alamat_client }}</td>
                     <td>{{ $client->kontak_client }}</td>
-                    <td class="d-flex flex-row">
+                    <td class="d-flex justify-content-between">
                         <a href="{{ route('client.edit', $client->id) }}" class="btn btn-warning btn-sm"><i class="fa-solid fa-edit"></i> Edit</a>
-                        <form action="{{ route('client.delete', $client->id) }}" method="POST" class="m-auto">
+                        <form action="{{ route('client.delete', $client->id) }}" method="POST">
                             @method('delete')
                             @csrf
                             <button class="btn btn-danger btn-sm" onclick="return confirm('Anda Yakin?')"><i class="fa-solid fa-trash"></i> Hapus</button>

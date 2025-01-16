@@ -8,7 +8,7 @@
             <th>No</th>
             <th>Nama Item</th>
             <th>Satuan</th>
-            <th>Action</th>
+            <th width="15%">Action</th>
         </thead>
         <tbody class="table-group-divider">
             @foreach ($data_item as $item)
@@ -22,9 +22,9 @@
                             Tidak Ada Data
                         @endif
                     </td>
-                    <td class="d-flex flex-row">
+                    <td class="d-flex justify-content-between">
                         <a href="{{ route('item.edit', $item->id) }}" class="btn btn-warning btn-sm"><i class="fa-solid fa-edit"></i> Edit</a>
-                        <form action="{{ route('item.delete', $item->id) }}" method="POST" class="m-auto">
+                        <form action="{{ route('item.delete', $item->id) }}" method="POST">
                             @method('delete')
                             @csrf
                             <button class="btn btn-danger btn-sm" onclick="return confirm('Anda Yakin?')"><i class="fa-solid fa-trash"></i> Hapus</button>

@@ -13,7 +13,7 @@ class Supplier extends Model
 
     protected $table = 'supplier';
 
-    public function rekening() : HasMany {
+    public function rekenings() : HasMany {
         
         return $this->hasMany(Rekening::class, 'supplier_id');
     }

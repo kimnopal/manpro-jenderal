@@ -11,7 +11,7 @@ class Satuan extends Model
     use HasFactory;
     protected $table = 'satuan';
 
-    public function item() : HasMany {
+    public function items() : HasMany {
         
         return $this->hasMany(Item::class, 'satuan_id');
     }
