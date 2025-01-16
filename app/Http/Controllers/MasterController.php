@@ -7,6 +7,8 @@ use App\Models\Client;
 use App\Models\Item;
 use App\Models\Rekening;
 use App\Models\Satuan;
+use App\Models\pembelian;
+use App\Models\Supplier;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -168,6 +170,221 @@ class MasterController extends Controller
         $item->delete();
 
         return Redirect::route('item.index');
+    }
+
+    //Pembelian 
+    public function pembelian_main(){
+        $data_pembelian = pembelian::all();
+        return \view('pembelian.pembelian-index',[
+        'judul_pembelian_index' => 'List Data Satuan',
+        'data_pembelian' => $data_pembelian,
+        ]);
+    }
+
+    public function pembelian_create(){
+        return \view('pembelian.create-pembelian',[
+            'judul_create_pembelian' => 'Tambah Pembelian'
+        ]);
+    }
+
+    public function pembelian_save(Request $request): RedirectResponse{
+    $proyekid = $request['proyekid'];
+    $qty = $request['qty'];
+    $satuanid = $request['satuanid'];
+    $hargabeli = $request['hargabeli'];
+    $supplierid = $request['supplierid'];
+    $pembelian = new pembelian();
+    $pembelian -> proyekid = $proyekid;
+    $pembelian -> qty = $qty;
+    $pembelian -> satuanid = $satuanid;
+    $pembelian -> hargabeli = $hargabeli;
+    $pembelian -> supplierid = $supplierid;
+    $pembelian->save();
+    return redirect::route('pembelian.pembelian-index');
+    }
+
+    public function pembelian_edit($id){
+        $pembelian = pembelian::find($id);
+        return \view('pembelian.edit-pembelian',[
+            'judul_edit_pembelian' => 'Edit Pembelian',
+            'pembelian' => $pembelian,
+        ]);
+    }
+
+    public function pembelian_delete($id) : RedirectResponse{
+        $pembelian = pembelian::find($id);
+        $pembelian->DB::delete();
+        return redirect::route('pembelian.pembelian-index');
+    }
+    
+    public function pembelian_update(Request $request, $id) : RedirectResponse{
+        $pembelian = pembelian::find($id);
+        $pembelian->qty = $request -> qty;
+        $pembelian->satuanid = $request -> satuanid;
+        $pembelian -> save();
+        return redirect::route('pembelian.pembelian-index');
+}
+    // Controller Bank
+    public function index_bank() {
+        $data_bank = Bank::all();
+
+        return \view('bank.index', [
+            'judul_index_bank' => 'List Data Bank',
+            'data_bank' => $data_bank,
+        ]);
+    }
+    
+    public function create_bank() {
+        
+        return \view('bank.create', [
+            'judul_create_bank' => 'Tambah Data Bank'
+        ]);
+    }
+
+    public function save_bank(Request $request) : RedirectResponse {
+        $bank = new Bank();
+        $bank->nama_bank = $request->nama_bank;
+        $bank->save();
+
+        return Redirect::route('bank.index');
+    }
+
+    public function edit_bank($id) {
+        $bank = Bank::find($id);
+
+        return \view('bank.edit', [
+            'judul_edit_bank' => 'Edit Data Bank',
+            'bank' => $bank,
+        ]);
+    }
+
+    public function update_bank(Request $request, $id) : RedirectResponse {
+        $bank = Bank::find($id);
+        $bank->nama_bank = $request->nama_bank;
+        $bank->save();
+
+        return Redirect::route('bank.index');
+    }
+
+    public function delete_bank($id) : RedirectResponse {
+        $bank = Bank::find($id);
+        $bank->delete();
+
+        return Redirect::route('bank.index');
+    }
+
+    // Controller Supplier
+    public function index_supplier() {
+        $data_supplier = Supplier::all();
+
+        return \view('supplier.index', [
+            'judul_index_supplier' => 'List Data Supplier',
+            'data_supplier' => $data_supplier,
+        ]);
+    }
+    
+    public function create_supplier() {
+        
+        return \view('supplier.create', [
+            'judul_create_supplier' => 'Tambah Data Supplier'
+        ]);
+    }
+
+    public function save_supplier(Request $request) : RedirectResponse {
+        $supplier = new supplier();
+        $supplier->nama_supplier = $request->nama_supplier;
+        $supplier->alamat_supplier = $request->alamat_supplier;
+        $supplier->kontak_supplier = $request->kontak_supplier;
+        $supplier->save();
+
+        return Redirect::route('supplier.index');
+    }
+
+    public function edit_supplier($id) {
+        $supplier = Supplier::find($id);
+
+        return \view('supplier.edit', [
+            'judul_edit_supplier' => 'Edit Data Supplier',
+            'supplier' => $supplier,
+        ]);
+    }
+
+    public function update_supplier(Request $request, $id) : RedirectResponse {
+        $supplier = Supplier::find($id);
+        $supplier->nama_supplier = $request->nama_supplier;
+        $supplier->alamat_supplier = $request->alamat_supplier;
+        $supplier->kontak_supplier = $request->kontak_supplier;
+        $supplier->save();
+
+        return Redirect::route('supplier.index');
+    }
+
+    public function delete_supplier($id) : RedirectResponse {
+        $supplier = Supplier::find($id);
+        $supplier->delete();
+
+        return Redirect::route('supplier.index');
+    }
+
+    // Controller Rekening
+    public function index_rekening() {
+        $data_rekening = Rekening::all();
+
+        return \view('rekening.index', [
+            'judul_index_rekening' => 'List Data Rekening',
+            'data_rekening' => $data_rekening,
+        ]);
+    }
+
+    public function create_rekening() {
+        $data_supplier = Supplier::all();
+        $data_bank = Bank::all();
+
+        return \view('rekening.create', [
+            'judul_create_rekening' => 'Tambah Data Rekening',
+            'data_supplier' => $data_supplier,
+            'data_bank' => $data_bank,
+        ]);
+    }
+
+    public function save_rekening(Request $request) : RedirectResponse {
+        $rekening = new Rekening();
+        $rekening->supplier_id = $request->supplier_id;
+        $rekening->bank_id = $request->bank_id;
+        $rekening->nomor_rekening = $request->nomor_rekening;
+        $rekening->save();
+
+        return Redirect::route('rekening.index');
+    }
+
+    public function edit_rekening($id) {
+        $data_supplier = Supplier::all();
+        $data_bank = Bank::all();
+        $rekening = Rekening::find($id);
+
+        return \view('rekening.edit', [
+            'judul_edit_rekening' => 'Edit Data Rekening',
+            'data_supplier' => $data_supplier,
+            'data_bank' => $data_bank,
+            'rekening' => $rekening,
+        ]);
+    }
+
+    public function update_rekening(Request $request, $id) : RedirectResponse {
+        $rekening = Rekening::find($id);
+        $rekening->supplier_id = $request->supplier_id;
+        $rekening->bank_id = $request->bank_id;
+        $rekening->nomor_rekening = $request->nomor_rekening;
+        $rekening->save();
+        
+        return Redirect::route('rekening.index');
+    }
+
+    public function delete_rekening($id) : RedirectResponse {
+        $rekening = Rekening::find($id);
+        $rekening->delete();
+
+        return Redirect::route('rekening.index');
     }
 }
 
