@@ -19,12 +19,15 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        Daftar Tabel
+                        Data Master
                     </a>
                     <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{ route('client.index') }}">Tabel Client</a></li>
                         <li><a class="dropdown-item" href="{{ route('satuan.index') }}">Tabel Satuan</a></li>
                         <li><a class="dropdown-item" href="{{ route('item.index') }}">Tabel Item</a></li>
-                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="{{ route('bank.index') }}">Tabel Bank</a></li>
+                        <li><a class="dropdown-item" href="{{ route('supplier.index') }}">Tabel Supplier</a></li>
+                        <li><a class="dropdown-item" href="{{ route('rekening.index') }}">Tabel Rekening</a></li>
                     </ul>
                 </li>
             </ul>

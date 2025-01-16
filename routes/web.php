@@ -43,14 +43,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/satuan/edit/{id}', [MasterController::class, 'edit_satuan'])->name('satuan.edit');
     Route::put('/satuan/update/{id}', [MasterController::class, 'update_satuan'])->name('satuan.update');
     Route::delete('/satuan/delete/{id}', [MasterController::class, 'delete_satuan'])->name('satuan.delete');
-
-    //CRUD Pembelian
-    Route::get('/pembelian', [MasterController::class, 'pembelian_main'])->name('pembelian.pembelian-index');
-    Route::get('/pembelian/create-pembelian', [MasterController::class, 'pembelian_create'])->name('pembelian.create-pembelian');
-    Route::post('/pembelian/save', [MasterController::class, 'pembelian_save'])->name('pembelian.save');
-    Route::get('/pembelian/edit-pembelian/{id}', [MasterController::class, 'pembelian_edit'])->name('pembelian.edit-pembelian');
-    Route::put('/pembelian/update/{id}', [MasterController::class, 'pembelian_update'])->name('pembelian.update');
-    Route::delete('/pembelian/delete/{id}', [MasterController::class, 'pembelian_delete'])->name('pembelian.delete');
 });
 
 require __DIR__ . '/auth.php';

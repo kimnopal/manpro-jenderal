@@ -13,8 +13,17 @@ return new class extends Migration
     {
         Schema::create('rekening', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('bank_id')->nullable()->constrained('bank')->nullOnDelete()->cascadeOnUpdate();
-            $table->foreignId('supplier_id')->nullable()->constrained('supplier')->nullOnDelete()->cascadeOnUpdate();
+            $table->foreignId('supplier_id')
+                    // ->unique()
+                    // ->nullable()
+                    ->constrained('supplier')
+                    // ->nullOnDelete()
+                    ->cascadeOnUpdate();
+            $table->foreignId('bank_id')
+                    // ->nullable()
+                    ->constrained('bank')
+                    // ->nullOnDelete()
+                    ->cascadeOnUpdate();
             $table->string('nomor_rekening');
             $table->timestamps();
         });

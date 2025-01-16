@@ -2,15 +2,70 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bank;
+use App\Models\Client;
 use App\Models\Item;
+use App\Models\Rekening;
 use App\Models\Satuan;
-use App\Models\pembelian;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
 class MasterController extends Controller
 {
+
+    public function index_client() {
+        $data_client = Client::all();
+
+        return \view('client.index', [
+            'judul_index_client' => 'List Data Client',
+            'data_client' => $data_client,
+        ]);
+    }
+    
+    public function create_client() {
+        
+        return \view('client.create', [
+            'judul_create_client' => 'Tambah Data Client'
+        ]);
+    }
+
+    public function save_client(Request $request) : RedirectResponse {
+        $client = new Client();
+        $client->nama_client = $request->nama_client;
+        $client->alamat_client = $request->alamat_client;
+        $client->kontak_client = $request->kontak_client;
+        $client->save();
+
+        return Redirect::route('client.index');
+    }
+
+    public function edit_client($id) {
+        $client = Client::find($id);
+
+        return \view('client.edit', [
+            'judul_edit_client' => 'Edit Data Client',
+            'client' => $client,
+        ]);
+    }
+
+    public function update_client(Request $request, $id) : RedirectResponse {
+        $client = client::find($id);
+        $client->nama_client = $request->nama_client;
+        $client->alamat_client = $request->alamat_client;
+        $client->kontak_client = $request->kontak_client;
+        $client->save();
+
+        return Redirect::route('client.index');
+    }
+
+    public function delete_client($id) : RedirectResponse {
+        $client = Client::find($id);
+        $client->delete();
+
+        return Redirect::route('client.index');
+    }
+
     // Controller Satuan
     public function index_satuan() {
         $data_satuan = Satuan::all();
@@ -113,59 +168,6 @@ class MasterController extends Controller
         $item->delete();
 
         return Redirect::route('item.index');
-    }
-
-    //Pembelian 
-    public function pembelian_main(){
-        $data_pembelian = pembelian::all();
-        return \view('pembelian.pembelian-index',[
-        'judul_pembelian_index' => 'List Data Satuan',
-        'data_pembelian' => $data_pembelian,
-        ]);
-    }
-
-    public function pembelian_create(){
-        return \view('pembelian.create-pembelian',[
-            'judul_create_pembelian' => 'Tambah Pembelian'
-        ]);
-    }
-
-    public function pembelian_save(Request $request): RedirectResponse{
-    $proyekid = $request['proyekid'];
-    $qty = $request['qty'];
-    $satuanid = $request['satuanid'];
-    $hargabeli = $request['hargabeli'];
-    $supplierid = $request['supplierid'];
-    $pembelian = new pembelian();
-    $pembelian -> proyekid = $proyekid;
-    $pembelian -> qty = $qty;
-    $pembelian -> satuanid = $satuanid;
-    $pembelian -> hargabeli = $hargabeli;
-    $pembelian -> supplierid = $supplierid;
-    $pembelian->save();
-    return redirect::route('pembelian.pembelian-index');
-    }
-
-    public function pembelian_edit($id){
-        $pembelian = pembelian::find($id);
-        return \view('pembelian.edit-pembelian',[
-            'judul_edit_pembelian' => 'Edit Pembelian',
-            'pembelian' => $pembelian,
-        ]);
-    }
-
-    public function pembelian_delete($id) : RedirectResponse{
-        $pembelian = pembelian::find($id);
-        $pembelian->DB::delete();
-        return redirect::route('pembelian.pembelian-index');
-    }
-    
-    public function pembelian_update(Request $request, $id) : RedirectResponse{
-        $pembelian = pembelian::find($id);
-        $pembelian->qty = $request -> qty;
-        $pembelian->satuanid = $request -> satuanid;
-        $pembelian -> save();
-        return redirect::route('pembelian.pembelian-index');
     }
 }
 

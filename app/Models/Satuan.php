@@ -10,7 +10,6 @@ class Satuan extends Model
 {
     use HasFactory;
     protected $table = 'satuan';
-    protected $fillable = ['nama_satuan'];
 
     public function item() : HasMany {
         
