@@ -26,6 +26,9 @@ class SatuanFactory extends Factory
             'Puluh Ribuan',
             'Ratus Ribuan',
             'Jutaan',
+            'Puluh Jutaan',
+            'Ratus Jutaan',
+            'Milyaran',
         ];
     
         $currentValue = $data[static::$index % count($data)];

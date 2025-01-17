@@ -10,7 +10,10 @@
         @method('put')
         @csrf
         <label for="nama_satuan" class="form-label">Nama Satuan : </label>
-        <input type="text" name="nama_satuan" id="nama_satuan" class="form-control mt-2" autofocus required value="{{ $satuan->nama_satuan }}">
+        <input type="text" name="nama_satuan" id="nama_satuan" class="form-control mt-2 @error('nama_satuan') is-invalid @enderror " autofocus value="{{ $satuan->nama_satuan }}">
+        @error('nama_satuan')
+            <div class="text-danger fst-italic">{{ 'Nama Satuan Perlu Diisi' }}</div>
+        @enderror
         <button class="btn btn-success mt-3"><i class="fa-solid fa-save"></i> Simpan Perubahan</button>
     </form>
 </x-app-layout>

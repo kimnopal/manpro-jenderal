@@ -14,7 +14,7 @@
         <tbody class="table-group-divider">
             @foreach ($data_supplier as $supplier)
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $loop->iteration + $data_supplier->firstItem() - 1 }}</td>
                     <td>{{ $supplier->nama_supplier }}</td>
                     <td>{{ $supplier->alamat_supplier }}</td>
                     <td>{{ $supplier->kontak_supplier }}</td>
@@ -30,4 +30,5 @@
             @endforeach
         </tbody>
     </table>
+    {{ $data_supplier->onEachSide(1)->links() }}
 </x-app-layout>

@@ -7,14 +7,20 @@
         @method('post')
         @csrf
         <label for="nama_item" class="form-label">Nama Item : </label>
-        <input type="text" name="nama_item" id="nama_item" class="form-control mt-2" autofocus required>
+        <input type="text" name="nama_item" id="nama_item" class="form-control mt-2 @error('nama_item') is-invalid @enderror " autofocus >
+        @error('nama_item')
+            <div class="text-danger fst-italic">{{ 'Nama Item Perlu Diisi' }}</div>
+        @enderror
         <label for="satuan_id" class="form-label mt-3">Satuan item : </label>
-        <select class="form-select mt-2" aria-label="Default select example" name="satuan_id" id="satuan_id" required>
+        <select class="form-select mt-2 @error('satuan_id') is-invalid @enderror" aria-label="Default select example" name="satuan_id" id="satuan_id" >
             <option value="" selected disabled>Pilih Satuan</option>
             @foreach ($data_satuan as $satuan)
                 <option value="{{ $satuan->id }}">{{ $satuan->nama_satuan }}</option>
             @endforeach
-          </select>
+        </select>
+        @error('satuan_id')
+            <div class="text-danger fst-italic">{{ 'Pilih Satuan Item' }}</div>
+        @enderror
         {{-- <input type="text" name="satuan_id" id="satuan_id" class="form-control mt-2" required> --}}
         <button class="btn btn-success mt-3"><i class="fa-solid fa-arrow-up-from-bracket"></i> Tambah item</button>
     </form>

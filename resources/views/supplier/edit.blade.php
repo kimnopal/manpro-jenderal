@@ -10,11 +10,20 @@
         @method('put')
         @csrf
         <label for="nama_supplier" class="form-label">Nama supplier : </label>
-        <input type="text" name="nama_supplier" id="nama_supplier" class="form-control mt-2" autofocus required value="{{ $supplier->nama_supplier }}">
+        <input type="text" name="nama_supplier" id="nama_supplier" class="form-control mt-2 @error('nama_supplier') is-invalid @enderror" autofocus value="{{ $supplier->nama_supplier }}">
+        @error('nama_supplier')
+            <div class="text-danger fst-italic">{{ 'Nama Supplier Perlu Diisi' }}</div>
+        @enderror
         <label for="alamat_supplier" class="form-label mt-3">Alamat supplier : </label>
-        <input type="text" name="alamat_supplier" id="alamat_supplier" class="form-control mt-2" required value="{{ $supplier->alamat_supplier }}">
+        <input type="text" name="alamat_supplier" id="alamat_supplier" class="form-control mt-2 @error('alamat_supplier') is-invalid @enderror " value="{{ $supplier->alamat_supplier }}">
+        @error('alamat_supplier')
+            <div class="text-danger fst-italic">{{ 'Alamat Supplier Perlu Diisi' }}</div>
+        @enderror
         <label for="kontak_supplier" class="form-label mt-3">Kontak supplier : </label>
-        <input type="text" name="kontak_supplier" id="kontak_supplier" class="form-control mt-2" required value="{{ $supplier->kontak_supplier }}">
+        <input type="text" name="kontak_supplier" id="kontak_supplier" class="form-control mt-2 @error('kontak_supplier') is-invalid @enderror " value="{{ $supplier->kontak_supplier }}">
+        @error('kontak_supplier')
+            <div class="text-danger fst-italic">{{ 'Kontak Supplier Perlu Diisi' }}</div>
+        @enderror
         <button class="btn btn-success mt-3"><i class="fa-solid fa-save"></i> Simpan Perubahan</button>
     </form>
 </x-app-layout>

@@ -10,7 +10,10 @@
         @method('put')
         @csrf
         <label for="nama_bank" class="form-label">Nama bank : </label>
-        <input type="text" name="nama_bank" id="nama_bank" class="form-control mt-2" autofocus required value="{{ $bank->nama_bank }}">
+        <input type="text" name="nama_bank" id="nama_bank" class="form-control mt-2 @error('nama_bank') is-invalid @enderror " autofocus value="{{ $bank->nama_bank }}">
+        @error('nama_bank')
+            <div class="text-danger fst-italic fs-6">{{ 'Nama Bank Perlu Diisi' }}</div>
+        @enderror
         <button class="btn btn-success mt-3"><i class="fa-solid fa-save"></i> Simpan Perubahan</button>
     </form>
 </x-app-layout>

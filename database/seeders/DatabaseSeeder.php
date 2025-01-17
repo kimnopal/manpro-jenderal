@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\Bank;
 use App\Models\Client;
+use App\Models\Item;
+use App\Models\Rekening;
 use App\Models\Satuan;
 use App\Models\Supplier;
 use App\Models\User;
@@ -26,9 +28,11 @@ class DatabaseSeeder extends Seeder
             'password' => '12345678',
             'remember_token' => Str::random(10),
         ]);
-        Satuan::factory()->count(7)->create();
-        Bank::factory()->count(4)->create();
-        Supplier::factory(6)->create();
-        Client::factory(10)->create();
+        // Satuan::factory()->count(7)->create();
+        // Bank::factory()->count(4)->create();
+        // Supplier::factory(6)->create();
+        Rekening::factory(100)->recycle(Supplier::factory(30)->create())->recycle(Bank::factory()->count(10)->create())->create();
+        Item::factory(50)->recycle(Satuan::factory(10)->create())->create();
+        Client::factory(30)->create();
     }
 }

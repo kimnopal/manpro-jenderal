@@ -10,9 +10,12 @@
         @method('put')
         @csrf
         <label for="nama_item" class="form-label">Nama Item : </label>
-        <input type="text" name="nama_item" id="nama_item" class="form-control mt-2" autofocus required value="{{ $item->nama_item }}">
+        <input type="text" name="nama_item" id="nama_item" class="form-control mt-2 @error('nama_item') is-invalid @enderror " autofocus value="{{ $item->nama_item }}">
+        @error('nama_item')
+            <div class="text-danger fst-italic">{{ 'Nama Item Perlu Diisi' }}</div>
+        @enderror
         <label for="satuan_id" class="form-label mt-3">Satuan Item : </label>
-        <select class="form-select mt-2" name="satuan_id" id="satuan_id" aria-label="Default select example" required>
+        <select class="form-select mt-2 @error('satuan_id') is-invalid @enderror" name="satuan_id" id="satuan_id" aria-label="Default select example">
             <option value="" disabled selected>Pilih Item</option>
             @foreach ($data_satuan as $satuan)
                 <option value="{{ $satuan->id }}" 
@@ -21,6 +24,9 @@
                 </option>
             @endforeach
         </select>
+        @error('satuan_id')
+            <div class="text-danger fst-italic">{{ 'Pilih Satuan Item' }}</div>
+        @enderror
         <button type="submit" class="btn btn-success mt-3"><i class="fa-solid fa-save"></i> Simpan Perubahan</button>
     </form>
 </x-app-layout>

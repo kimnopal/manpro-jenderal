@@ -23,6 +23,12 @@ class BankFactory extends Factory
             'BCA',
             'BNI',
             'BTN',
+            'Mandiri',
+            'Danamon',
+            'BSI',
+            'Cimb Niaga',
+            'Permata',
+            'Jateng'
         ];
     
         $currentValue = $data[static::$index % count($data)];

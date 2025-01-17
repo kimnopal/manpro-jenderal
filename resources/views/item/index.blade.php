@@ -13,7 +13,7 @@
         <tbody class="table-group-divider">
             @foreach ($data_item as $item)
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $loop->iteration + $data_item->firstItem() - 1 }}</td>
                     <td>{{ $item->nama_item }}</td>
                     <td>
                         @if($item->satuan_id)
@@ -34,4 +34,5 @@
             @endforeach
         </tbody>
     </table>
+    {{ $data_item->onEachSide(1)->links() }}
 </x-app-layout>

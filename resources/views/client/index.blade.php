@@ -14,7 +14,7 @@
         <tbody class="table-group-divider">
             @foreach ($data_client as $client)
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $loop->iteration + $data_client->firstItem() - 1 }}</td>
                     <td>{{ $client->nama_client }}</td>
                     <td>{{ $client->alamat_client }}</td>
                     <td>{{ $client->kontak_client }}</td>
@@ -30,4 +30,5 @@
             @endforeach
         </tbody>
     </table>
+    {{ $data_client->onEachSide(1)->links() }}
 </x-app-layout>

@@ -10,9 +10,12 @@
         @method('put')
         @csrf
         <label for="nomor_rekening" class="form-label mt-3" >Nomor Rekening : </label>
-        <input type="text" name="nomor_rekening" id="nomor_rekening" class="form-control mt-2" value="{{ $rekening->nomor_rekening }}" required>
+        <input type="text" name="nomor_rekening" id="nomor_rekening" class="form-control mt-2 @error('nomor_rekening') is-invalid @enderror " value="{{ $rekening->nomor_rekening }}" >
+        @error('nomor_rekening')
+            <div class="text-danger fst-italic">{{ 'Nomor Rekening Perlu Diisi' }}</div>
+        @enderror
         <label for="supplier_id" class="form-label mt-3">Pilih Supplier Pemilik</label>
-        <select name="supplier_id" id="supplier_id" class="form-select mt-2" required>
+        <select name="supplier_id" id="supplier_id" class="form-select mt-2 @error('supplier_id') is-invalid @enderror" >
             <option value="{{ $rekening->supplier_id ?? '' }}" selected readonly>
                 {{ $rekening->supplier->nama_supplier ?? "Pilih Supplier" }}
             </option>
@@ -25,8 +28,11 @@
                 </option>
             @endforeach
         </select>
+        @error('supplier_id')
+            <div class="text-danger fst-italic">{{ 'Pilih Supplier Rekening' }}</div>
+        @enderror
         <label for="bank_id" class="form-label mt-3">Pilih Bank Rekening</label>
-        <select name="bank_id" id="bank_id" class="form-select mt-2" required>
+        <select name="bank_id" id="bank_id" class="form-select mt-2 @error('bank_id') is-invalid @enderror" >
             <option value="{{ $rekening->bank_id ?? ""}}" selected readonly>
                 {{ $rekening->bank->nama_bank ?? "Pilih Bank"}}
             </option>
@@ -38,6 +44,9 @@
                     {{ $bank->nama_bank }}</option>
             @endforeach
         </select>
+        @error('bank_id')
+            <div class="text-danger fst-italic">{{ 'Pilih Bank Rekening' }}</div>
+        @enderror
         <button type="submit" class="btn btn-success mt-3"><i class="fa-solid fa-floppy-disk"></i> Simpan Perubahan</button>
     </form>
 </x-app-layout>

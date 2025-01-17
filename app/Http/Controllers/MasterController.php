@@ -16,8 +16,9 @@ use Illuminate\Support\Facades\Redirect;
 class MasterController extends Controller
 {
 
+    // Controller Client
     public function index_client() {
-        $data_client = Client::all();
+        $data_client = Client::paginate(5);
 
         return \view('client.index', [
             'judul_index_client' => 'List Data Client',
@@ -33,6 +34,11 @@ class MasterController extends Controller
     }
 
     public function save_client(Request $request) : RedirectResponse {
+        $validated = $request->validate([
+            'nama_client' => 'required',
+            'alamat_client' => 'required',
+            'kontak_client' => 'required',
+        ]);
         $client = new Client();
         $client->nama_client = $request->nama_client;
         $client->alamat_client = $request->alamat_client;
@@ -52,6 +58,11 @@ class MasterController extends Controller
     }
 
     public function update_client(Request $request, $id) : RedirectResponse {
+        $validated = $request->validate([
+            'nama_client' => 'required',
+            'alamat_client' => 'required',
+            'kontak_client' => 'required',
+        ]);
         $client = client::find($id);
         $client->nama_client = $request->nama_client;
         $client->alamat_client = $request->alamat_client;
@@ -70,7 +81,7 @@ class MasterController extends Controller
 
     // Controller Satuan
     public function index_satuan() {
-        $data_satuan = Satuan::all();
+        $data_satuan = Satuan::paginate(5);
 
         return \view('satuan.index', [
             'judul_index_satuan' => 'List Data Satuan',
@@ -86,6 +97,9 @@ class MasterController extends Controller
     }
 
     public function save_satuan(Request $request) : RedirectResponse {
+        $validated = $request->validate([
+            'nama_satuan' => 'required'
+        ]);
         $satuan = new Satuan();
         $satuan->nama_satuan = $request->nama_satuan;
         $satuan->save();
@@ -103,6 +117,9 @@ class MasterController extends Controller
     }
 
     public function update_satuan(Request $request, $id) : RedirectResponse {
+        $validated = $request->validate([
+            'nama_satuan' => 'required',
+        ]);
         $satuan = Satuan::find($id);
         $satuan->nama_satuan = $request->nama_satuan;
         $satuan->save();
@@ -119,7 +136,7 @@ class MasterController extends Controller
     
     // Controller Item
     public function index_item() {
-        $data_item = Item::all();
+        $data_item = Item::with(['satuan'])->paginate(10);
 
         return \view('item.index', [
             'judul_index_item' => 'List Data Item',
@@ -137,6 +154,10 @@ class MasterController extends Controller
     }
 
     public function save_item(Request $request) : RedirectResponse {
+        $validated = $request->validate([
+            'nama_item' => 'required',
+            'satuan_id' => 'required',
+        ]);
         $item = new Item();
         $item->nama_item = $request->nama_item;
         $item->satuan_id = $request->satuan_id;
@@ -157,6 +178,10 @@ class MasterController extends Controller
     }
 
     public function update_item(Request $request, $id) : RedirectResponse {
+        $validated = $request->validate([
+            'nama_item' => 'required',
+            'satuan_id' => 'required',
+        ]);
         $item = Item::find($id);
         $item->nama_item = $request->nama_item;
         $item->satuan_id = $request->satuan_id;
@@ -227,7 +252,7 @@ class MasterController extends Controller
 }
     // Controller Bank
     public function index_bank() {
-        $data_bank = Bank::all();
+        $data_bank = Bank::paginate(5);
 
         return \view('bank.index', [
             'judul_index_bank' => 'List Data Bank',
@@ -243,6 +268,9 @@ class MasterController extends Controller
     }
 
     public function save_bank(Request $request) : RedirectResponse {
+        $validated = $request->validate([
+            'nama_bank' => 'required',
+        ]);
         $bank = new Bank();
         $bank->nama_bank = $request->nama_bank;
         $bank->save();
@@ -260,6 +288,9 @@ class MasterController extends Controller
     }
 
     public function update_bank(Request $request, $id) : RedirectResponse {
+        $validated = $request->validate([
+            'nama_bank' => 'required',
+        ]);
         $bank = Bank::find($id);
         $bank->nama_bank = $request->nama_bank;
         $bank->save();
@@ -276,7 +307,7 @@ class MasterController extends Controller
 
     // Controller Supplier
     public function index_supplier() {
-        $data_supplier = Supplier::all();
+        $data_supplier = Supplier::paginate(5);
 
         return \view('supplier.index', [
             'judul_index_supplier' => 'List Data Supplier',
@@ -292,6 +323,11 @@ class MasterController extends Controller
     }
 
     public function save_supplier(Request $request) : RedirectResponse {
+        $validated = $request->validate([
+            'nama_supplier' => 'required',
+            'alamat_supplier' => 'required',
+            'kontak_supplier' => 'required',
+        ]);
         $supplier = new supplier();
         $supplier->nama_supplier = $request->nama_supplier;
         $supplier->alamat_supplier = $request->alamat_supplier;
@@ -311,6 +347,11 @@ class MasterController extends Controller
     }
 
     public function update_supplier(Request $request, $id) : RedirectResponse {
+        $validated = $request->validate([
+            'nama_supplier' => 'required',
+            'alamat_supplier' => 'required',
+            'kontak_supplier' => 'required',
+        ]);
         $supplier = Supplier::find($id);
         $supplier->nama_supplier = $request->nama_supplier;
         $supplier->alamat_supplier = $request->alamat_supplier;
@@ -329,7 +370,7 @@ class MasterController extends Controller
 
     // Controller Rekening
     public function index_rekening() {
-        $data_rekening = Rekening::paginate(3);
+        $data_rekening = Rekening::with(['supplier', 'bank'])->paginate(10);
 
         return \view('rekening.index', [
             'judul_index_rekening' => 'List Data Rekening',
@@ -349,6 +390,11 @@ class MasterController extends Controller
     }
 
     public function save_rekening(Request $request) : RedirectResponse {
+        $validated = $request->validate([
+            'nomor_rekening' => 'required',
+            'supplier_id' => 'required',
+            'bank_id' => 'required',
+        ]);
         $rekening = new Rekening();
         $rekening->supplier_id = $request->supplier_id;
         $rekening->bank_id = $request->bank_id;
@@ -372,6 +418,11 @@ class MasterController extends Controller
     }
 
     public function update_rekening(Request $request, $id) : RedirectResponse {
+        $validated = $request->validate([
+            'supplier_id' => 'required',
+            'bank_id' => 'required',
+            'nomor_rekening' => 'required',
+        ]);
         $rekening = Rekening::find($id);
         $rekening->supplier_id = $request->supplier_id;
         $rekening->bank_id = $request->bank_id;

@@ -12,7 +12,7 @@
         <tbody class="table-group-divider">
             @foreach ($data_bank as $bank)
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $loop->iteration + $data_bank->firstItem() - 1 }}</td>
                     <td>{{ $bank->nama_bank }}</td>
                     <td class="d-flex justify-content-between">
                         <a href="{{ route('bank.edit', $bank->id) }}" class="btn btn-warning btn-sm"><i class="fa-solid fa-edit"></i> Edit</a>
@@ -26,4 +26,5 @@
             @endforeach
         </tbody>
     </table>
+    {{ $data_bank->onEachSide(1)->links() }}
 </x-app-layout>

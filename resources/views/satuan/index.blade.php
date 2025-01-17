@@ -12,7 +12,7 @@
         <tbody class="table-group-divider">
             @foreach ($data_satuan as $satuan)
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $loop->iteration + $data_satuan->firstItem() - 1 }}</td>
                     <td>{{ $satuan->nama_satuan }}</td>
                     <td class="d-flex justify-content-between">
                         <a href="{{ route('satuan.edit', $satuan->id) }}" class="btn btn-warning btn-sm"><i class="fa-solid fa-edit"></i> Edit</a>
@@ -26,4 +26,5 @@
             @endforeach
         </tbody>
     </table>
+    {{ $data_satuan->onEachSide(1)->links() }}
 </x-app-layout>

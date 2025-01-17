@@ -7,7 +7,10 @@
         @method('post')
         @csrf
         <label for="nama_bank" class="form-label">Nama Bank : </label>
-        <input type="text" name="nama_bank" id="nama_bank" class="form-control mt-2" autofocus required>
+        <input type="text" name="nama_bank" id="nama_bank" class="form-control mt-2 @error('nama_bank') is-invalid @enderror " autofocus >
+        @error('nama_bank')
+            <div class="text-danger fst-italic fs-6">{{ 'Nama Bank Perlu Diisi' }}</div>
+        @enderror
         <button class="btn btn-success mt-3"><i class="fa-solid fa-arrow-up-from-bracket"></i> Tambah Bank</button>
     </form>
 </x-app-layout>

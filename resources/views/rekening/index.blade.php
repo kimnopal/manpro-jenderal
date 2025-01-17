@@ -14,7 +14,7 @@
         <tbody class="table-group-divider">
             @foreach ($data_rekening as $rekening)
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $loop->iteration + $data_rekening->firstItem() - 1}}</td>
                     <td>
                         @if ($rekening->supplier_id)
                             {{ $rekening->supplier->nama_supplier }}
@@ -42,5 +42,5 @@
             @endforeach
         </tbody>
     </table>
-    {{ $data_rekening->links() }}
+    {{ $data_rekening->onEachSide(1)->links() }}
 </x-app-layout>
