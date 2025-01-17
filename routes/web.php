@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\MasterController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProyekController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -17,9 +18,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    
 
-    // Modul Master 
+
+    // Modul Master
     // Crud Client
     Route::get('/client', [MasterController::class, 'index_client'])->name('client.index');
     Route::get('/client/tambah', [MasterController::class, 'create_client'])->name('client.create');
@@ -75,6 +76,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/pembelian/edit-pembelian/{id}', [MasterController::class, 'pembelian_edit'])->name('pembelian.edit-pembelian');
     Route::put('/pembelian/update/{id}', [MasterController::class, 'pembelian_update'])->name('pembelian.update');
     Route::delete('/pembelian/delete/{id}', [MasterController::class, 'pembelian_delete'])->name('pembelian.delete');
+
+    // CRUD Proyek
+    Route::get('/proyek', [ProyekController::class, 'index_proyek'])->name('proyek.index');
+    Route::get('/proyek/tambah', [ProyekController::class, 'tambah_proyek'])->name('proyek.tambah');
+    Route::post('/proyek/simpan', [ProyekController::class, 'simpan_proyek'])->name('proyek.simpan');
+    Route::get('/proyek/ubah/{id}', [ProyekController::class, 'ubah_proyek'])->name('proyek.ubah');
+    Route::post('proyek/ubah/{id}', [ProyekController::class, 'update_proyek'])->name('proyek.update');
+    Route::delete('/proyek/hapus/{id}', [ProyekController::class, 'hapus_proyek'])->name('proyek.hapus');
 });
 
 require __DIR__ . '/auth.php';
