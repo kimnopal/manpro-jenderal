@@ -33,6 +33,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('pembelian.pembelian-index') }}">Pembelian</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('proyek.index') }}">Proyek</a>
+                </li>
             </ul>
         </div>
     </div>
