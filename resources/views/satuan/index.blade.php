@@ -1,7 +1,14 @@
 <x-app-layout>
     <div class="d-flex justify-content-between mt-3">
         <h4>{{ $judul_index_satuan }}</h4>
-        <a href="{{ route('satuan.create') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Tambah Satuan</a>
+        <div class="d-flex justify-content-end w-75">
+            <form action="{{ route('satuan.index') }}" role="search" class="d-flex me-5 w-50">
+                @csrf
+                <input type="search" class="form-control me-3 border-2 border-success" name="search_satuan" placeholder="Cari nama satuan" autofocus>
+                <button class="btn btn-success w-25">Cari</button>
+            </form>
+            <a href="{{ route('satuan.create') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Tambah Satuan</a>
+        </div>
     </div>
     <table class="table table-bordered table-striped mt-3">
         <thead class="table-success">
@@ -16,15 +23,33 @@
                     <td>{{ $satuan->nama_satuan }}</td>
                     <td class="d-flex justify-content-between">
                         <a href="{{ route('satuan.edit', $satuan->id) }}" class="btn btn-warning btn-sm"><i class="fa-solid fa-edit"></i> Edit</a>
-                        <form action="{{ route('satuan.delete', $satuan->id) }}" method="POST">
-                            @method('delete')
-                            @csrf
-                            <button class="btn btn-danger btn-sm" onclick="return confirm('Anda Yakin?')"><i class="fa-solid fa-trash"></i> Hapus</button>
-                        </form>
+                        <button class="btn btn-danger btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#delete_satuan_{{ $satuan->id }}"><i class="fa-solid fa-trash"></i> Hapus</button>
+                        <div class="modal modal-lg fade" id="delete_satuan_{{ $satuan->id }}" aria-labelledby="delete_satuan_{{ $satuan->id }}_label" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="delete_satuan_{{ $satuan->id }}_label">Hapus Satuan</h1>
+                                        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h1 class="fs-6">Apakah Anda yakin ingin menghapus satuan ini?</h1>
+                                    </div>
+                                    <dif class="modal-footer">
+                                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Tutup</button>
+                                        <form action="{{ route('satuan.delete', $satuan->id) }}" method="POST">
+                                            @method('delete')
+                                            @csrf
+                                            <button class="btn btn-danger" type="submit">Hapus</button>
+                                        </form>
+                                    </dif>
+                                </div>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
     {{ $data_satuan->onEachSide(1)->links() }}
+    
 </x-app-layout>
