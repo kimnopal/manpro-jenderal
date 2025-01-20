@@ -36,6 +36,33 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('proyek.index') }}">Proyek</a>
                 </li>
+                <li class="nav-item dropdown">  
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">  
+                        <i class="fas fa-money-bill-wave"></i> Pembayaran  
+                    </a>  
+                    <ul class="dropdown-menu">  
+                        <li>  
+                            <a class="dropdown-item" href="{{ route('pembayaran.index') }}">  
+                                <i class="fas fa-table"></i> Tabel Pembayaran  
+                            </a>  
+                        </li>  
+                        <li>  
+                            <a class="dropdown-item" href="{{ route('kwitansi.index') }}">  
+                                <i class="fas fa-plus-circle"></i> Tabel kwitansi  
+                            </a>  
+                        </li>
+                        <li>  
+                            <a class="dropdown-item" href="{{ route('invoice.index') }}">  
+                                <i class="fas fa-plus-circle"></i> Tabel Invoice  
+                            </a>  
+                        </li>  
+                        <li>  
+                            <a class="dropdown-item" href="{{ route('invoice_detail.index') }}">  
+                                <i class="fas fa-plus-circle"></i> Tabel Invoice Detail  
+                            </a>  
+                        </li>
+                    </ul>  
+                </li>  
             </ul>
         </div>
     </div>
