@@ -42,24 +42,15 @@
                     </a>  
                     <ul class="dropdown-menu">  
                         <li>  
-                            <a class="dropdown-item" href="{{ route('pembayaran.index') }}">  
-                                <i class="fas fa-table"></i> Tabel Pembayaran  
-                            </a>  
-                        </li>  
-                        <li>  
-                            <a class="dropdown-item" href="{{ route('kwitansi.index') }}">  
-                                <i class="fas fa-plus-circle"></i> Tabel kwitansi  
-                            </a>  
-                        </li>
-                        <li>  
                             <a class="dropdown-item" href="{{ route('invoice.index') }}">  
                                 <i class="fas fa-plus-circle"></i> Tabel Invoice  
                             </a>  
-                        </li>  
+                        </li>
                         <li>  
-                            <a class="dropdown-item" href="{{ route('invoice_detail.index') }}">  
-                                <i class="fas fa-plus-circle"></i> Tabel Invoice Detail  
+                            <a class="dropdown-item" href="{{ route('kwitansi.index') }}">  
+                                <i class="fas fa-plus-circle"></i> Tabel Kwitansi  
                             </a>  
+                        </li>  
                         </li>
                     </ul>  
                 </li>  
