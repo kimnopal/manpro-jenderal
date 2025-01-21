@@ -48,7 +48,7 @@
                         </li>
                         <li>  
                             <a class="dropdown-item" href="{{ route('kwitansi.index') }}">  
-                                <i class="fas fa-table"></i> Tabel Kwitansi  
+                                <i class="fas fa-plus-circle"></i> Tabel Kwitansi  
                             </a>  
                         </li>  
                         </li>
