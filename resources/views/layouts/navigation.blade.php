@@ -47,8 +47,8 @@
                             </a>  
                         </li>
                         <li>  
-                            <a class="dropdown-item" href="{{ route('pembayaran.index') }}">  
-                                <i class="fas fa-table"></i> Tabel Pembayaran  
+                            <a class="dropdown-item" href="{{ route('kwitansi.index') }}">  
+                                <i class="fas fa-table"></i> Tabel Kwitansi  
                             </a>  
                         </li>  
                         </li>
