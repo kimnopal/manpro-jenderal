@@ -19,8 +19,15 @@ class Supplier extends Model
         return $this->hasMany(Rekening::class, 'supplier_id');
     }
 
+    
+
     public function scopeFilternama(Builder $query) : void {
         
         $query->where('nama_supplier', 'like', '%'.\request('search_nama').'%');
     }
+
+    public function pembelians() : HasMany{
+        return $this->hasMany(pembelian::class, 'supplierid');
+    }
 }
+

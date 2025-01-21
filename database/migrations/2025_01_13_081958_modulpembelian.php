@@ -13,11 +13,22 @@ return new class extends Migration
     {
         Schema::create('pembelian', function (Blueprint $table) {
             $table->id();
-            $table->integer('proyekid');
+            $table->foreignId('proyekid')
+            ->constrained('proyek')
+            ->cascadeOnUpdate();
+            
             $table->integer('qty');
-            $table->integer('satuanid');
+            
+            $table->foreignId('satuanid')
+            ->constrained('satuan')
+            ->cascadeOnUpdate();
+
             $table->integer('hargabeli');
-            $table->integer('supplierid');
+
+            $table->foreignId('supplierid')
+            ->constrained('supplier')
+            ->cascadeOnUpdate();
+            
             $table->timestamps();
             });
     }

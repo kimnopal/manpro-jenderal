@@ -7,13 +7,21 @@
         @method('post')
         @csrf
         <label for="proyekid" class="form-label">Proyek ID : </label>
-        <input type="text" name="proyekid" id="proyekid" class="form-control mt-2" autofocus required>
+        <input type="text" name="proyekid" id="proyekid" class="form-control mt-2" @error()>
 
         <label for="qty" class="form-label">Jumlah Barang : </label>
         <input type="text" name="qty" id="qty" class="form-control mt-2" autofocus required>
 
         <label for="satuanid" class="form-label">Satuan ID : </label>
-        <input type="text" name="satuanid" id="satuanid" class="form-control mt-2" autofocus required>
+        <select class="form-select mt-2 @error('satuanid') is-invalid @enderror" aria-label="Default select example" name="satuanid" id="satuanid" >
+            <option value="" selected disabled>Pilih Satuan</option>
+            @foreach ($data_satuan as $satuan)
+                <option value="{{ $satuan->id }}">{{ $satuan->nama_satuan }}</option>
+            @endforeach
+        </select>
+        @error('satuan_id')
+            <div class="text-danger fst-italic">{{ 'Pilih Satuan Item' }}</div>
+        @enderror
 
         <label for="hargabeli" class="form-label">Harga Beli : </label>
         <input type="text" name="hargabeli" id="hargabeli" class="form-control mt-2" autofocus required>

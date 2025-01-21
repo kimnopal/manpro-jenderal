@@ -21,4 +21,8 @@ class Satuan extends Model
         
         $query->where('nama_satuan', 'like', '%'.\request('search_satuan').'%');
     }
+
+    public function pembelians() : HasMany{
+        return $this->hasMany(pembelian::class, 'satuanid');
+    }
 }

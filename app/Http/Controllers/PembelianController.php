@@ -50,7 +50,7 @@ class PembelianController extends Controller
 
     public function pembelian_delete($id) : RedirectResponse{
         $pembelian = pembelian::find($id);
-        $pembelian->DB::delete();
+        $pembelian->delete();
         return redirect::route('pembelian.pembelian-index');
     }
     
