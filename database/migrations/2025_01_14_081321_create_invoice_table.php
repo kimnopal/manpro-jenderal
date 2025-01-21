@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('invoice', function (Blueprint $table) {
             $table->id();
             $table->string('no_invoice');
-            $table->string('client');
+            $table->foreignId('nama_client')
+                    ->constrained('client')
+                    ->cascadeOnUpdate();
             $table->date('tanggal');
             $table->string('catatan');
             $table->timestamps();

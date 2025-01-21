@@ -28,6 +28,13 @@ class DatabaseSeeder extends Seeder
             'password' => '12345678',
             'remember_token' => Str::random(10),
         ]);
+        User::create([
+            'name' => 'Los Nexa',
+            'email' => 'losnexa@gmail.com',
+            'email_verified_at' => now(),
+            'password' => '90900909',
+            'remember_token' => Str::random(10),
+        ]);
         // Satuan::factory()->count(7)->create();
         // Bank::factory()->count(4)->create();
         // Supplier::factory(6)->create();

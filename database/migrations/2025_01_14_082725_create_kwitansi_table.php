@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('kwitansi', function (Blueprint $table) {
             $table->id();
-            $table->string('client');
+            $table->foreignId('nama_client')
+                    ->constrained('client')
+                    ->cascadeOnUpdate();
             $table->integer('total');
             $table->string('tujuan');
             $table->date('tanggal');
