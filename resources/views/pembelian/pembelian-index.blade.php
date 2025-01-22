@@ -1,7 +1,14 @@
 <x-app-layout>
     <div class="d-flex justify-content-between mt-3">
         <h4>{{ $judul_pembelian_index }}</h4>
-        <a href="{{ route('pembelian.create-pembelian') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Tambah Pembelian</a>
+        <div class="d-flex justify-content-end w-75">
+            <form action="{{ route('pembelian.pembelian-index') }}" role="search" class="d-flex me-5 w-50">
+                @csrf
+                <input type="search" class="form-control me-3 border-2 border-success" name="search_pembelian" placeholder="Cari Pembelian" autofocus>
+                <button class="btn btn-success w-25">Cari</button>
+            </form>
+            <a href="{{ route('pembelian.create-pembelian') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Tambah Pembelian</a>
+        </div>
     </div>
     <table class="table table-bordered table-striped mt-3">
         <thead class="table-success">
@@ -37,4 +44,5 @@
             @endforeach
         </tbody>
     </table>
+    {{ $data_pembelian->onEachSide(1)->links() }}
 </x-app-layout>

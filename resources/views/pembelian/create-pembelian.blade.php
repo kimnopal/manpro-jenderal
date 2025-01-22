@@ -7,10 +7,21 @@
         @method('post')
         @csrf
         <label for="proyekid" class="form-label">Proyek ID : </label>
-        <input type="text" name="proyekid" id="proyekid" class="form-control mt-2" @error()>
+        <select class="form-select mt-2 @error('proyekid') is-invalid @enderror" aria-label="Default select example" name="proyekid" id="proyekid" >
+            <option value="" selected disabled>Pilih Proyek ID</option>
+            @foreach ($data_proyek as $proyek)
+                <option value="{{ $proyek->id }}">{{ $proyek->klien_id }}</option>
+            @endforeach
+        </select>
+        @error('proyekid')
+        <div class="text-danger fst-italic">{{ 'Pilih Proyek Item' }}</div>
+        @enderror
 
         <label for="qty" class="form-label">Jumlah Barang : </label>
-        <input type="text" name="qty" id="qty" class="form-control mt-2" autofocus required>
+        <input type="text" name="qty" id="qty" class="form-control mt-2 @error('qty') is-invalid @enderror " autofocus>
+        @error('qty')
+            <div class="text-danger fst-italic">{{ 'Pilih Jumlah Barang' }}</div>
+        @enderror
 
         <label for="satuanid" class="form-label">Satuan ID : </label>
         <select class="form-select mt-2 @error('satuanid') is-invalid @enderror" aria-label="Default select example" name="satuanid" id="satuanid" >
@@ -19,15 +30,27 @@
                 <option value="{{ $satuan->id }}">{{ $satuan->nama_satuan }}</option>
             @endforeach
         </select>
-        @error('satuan_id')
-            <div class="text-danger fst-italic">{{ 'Pilih Satuan Item' }}</div>
+        @error('satuanid')
+        <div class="text-danger fst-italic">{{ 'Pilih Satuan Item' }}</div>
         @enderror
 
         <label for="hargabeli" class="form-label">Harga Beli : </label>
-        <input type="text" name="hargabeli" id="hargabeli" class="form-control mt-2" autofocus required>
+        <input type="text" name="hargabeli" id="hargabeli" class="form-control mt-2 @error('hargabeli') is-invalid @enderror " autofocus>
+        @error('hargabeli')
+        <div class="text-danger fst-italic">{{ 'Pilih Haga Beli' }}</div>
+        @enderror
 
         <label for="supplierid" class="form-label">Supplier ID : </label>
-        <input type="text" name="supplierid" id="supplierid" class="form-control mt-2" autofocus required>
+        <select class="form-select mt-2 @error('supplierid') is-invalid @enderror" aria-label="Default select example" name="supplierid" id="supplierid" >
+            <option value="" selected disabled>Pilih Supplier</option>
+            @foreach ($data_supplier as $supplier)
+                <option value="{{ $supplier->id }}">{{ $supplier->nama_supplier }}</option>
+            @endforeach
+        </select>
+        @error('supplierid')
+        <div class="text-danger fst-italic">{{ 'Pilih Supplier Item' }}</div>
+        @enderror
+
         <button class="btn btn-success mt-3"><i class="fa-solid fa-arrow-up-from-bracket"></i> Tambah Satuan</button>
     </form>
 </x-app-layout>

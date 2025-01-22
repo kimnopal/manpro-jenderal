@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\pembelian;
+use App\Models\Proyek;
+use App\Models\Satuan;
+use App\Models\Supplier;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
@@ -10,7 +13,7 @@ use Illuminate\Http\Request;
 class PembelianController extends Controller
 {
     public function pembelian_main() {
-        $data_pembelian = pembelian::all();
+        $data_pembelian = pembelian::with(['satuan'])->filternama()->paginate(10);
 
         return \view('pembelian.pembelian-index',[
         'judul_pembelian_index' => 'List Data Pembelian',
@@ -19,8 +22,14 @@ class PembelianController extends Controller
     }
 
     public function pembelian_create(){
+        $data_satuan = Satuan::all();
+        $data_supplier = Supplier::all();
+        $data_proyek = Proyek::all();
         return \view('pembelian.create-pembelian',[
-            'judul_create_pembelian' => 'Tambah Pembelian'
+            'judul_create_pembelian' => 'Tambah Pembelian',
+            'data_satuan' => $data_satuan,
+            'data_supplier' => $data_supplier,
+            'data_proyek' => $data_proyek,
         ]);
     }
 
@@ -42,9 +51,15 @@ class PembelianController extends Controller
 
     public function pembelian_edit($id){
         $pembelian = pembelian::find($id);
+        $data_satuan = Satuan::all();
+        $data_proyek = Proyek::all();
+        $data_supplier = Supplier::all();
         return \view('pembelian.edit-pembelian',[
             'judul_edit_pembelian' => 'Edit Pembelian',
             'pembelian' => $pembelian,
+            'data_satuan' => $data_satuan,
+            'data_proyek' => $data_proyek,
+            'data_supplier' => $data_supplier,
         ]);
     }
 
