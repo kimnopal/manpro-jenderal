@@ -17,9 +17,9 @@ class SatuanController extends Controller
             'data_satuan' => $data_satuan,
         ]);
     }
-    
+
     public function create_satuan() {
-        
+
         return \view('satuan.create', [
             'judul_create_satuan' => 'Tambah Data Satuan'
         ]);

@@ -1,7 +1,13 @@
 <x-app-layout>
     <div class="d-flex justify-content-between mt-3">
         <h4>{{ $judul_index_proyek }}</h4>
-        <a href="{{ route('proyek.tambah') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i>Tambah proyek</a>
+        <div class="d-flex justify-content-end w-75">
+            <form action="{{ route('proyek.index') }}" role="search" class="d-flex me-5 w-50">
+                <input type="search" class="form-control me-3 border-2 border-success" name="search_proyek" placeholder="Cari nomor proyek" autofocus>
+                <button class="btn btn-success w-25">Cari</button>
+            </form>
+            <a href="{{ route('proyek.tambah') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i>Tambah proyek</a>
+        </div>
     </div>
     <table class="table table-bordered table-striped mt-3">
         <thead class="table-success">
@@ -39,5 +45,5 @@
             @endforeach
         </tbody>
     </table>
-    {{-- {{ $data_rekening->links() }} --}}
+    {{ $data_proyek->onEachSide(1)->links() }}
 </x-app-layout>
