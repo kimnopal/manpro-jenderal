@@ -14,6 +14,10 @@ class Client extends Model
 
     public function scopeFilterNama(Builder $query) : void {
         
-        $query->where('nama_client', 'like', '%'.\request('search_client').'%');
+        $query
+        ->where('nama_client', 'like', '%'.\request('search_client').'%')
+        ->orWhere('alamat_client', 'like', '%'.\request('search_client').'%')
+        ->orWhere('kontak_client', 'like', '%'.\request('search_client').'%')
+        ;
     }
 }

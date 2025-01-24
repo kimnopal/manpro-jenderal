@@ -19,16 +19,16 @@ class SatuanFactory extends Factory
     {
     
         $data = [
-            'Satuan',
-            'Puluhan',
-            'Ratusan',
-            'Ribuan',
-            'Puluh Ribuan',
-            'Ratus Ribuan',
-            'Jutaan',
-            'Puluh Jutaan',
-            'Ratus Jutaan',
-            'Milyaran',
+            'Pcs',
+            'Box',
+            'Bungkus',
+            'Kardus',
+            'Buah',
+            'Lusin',
+            'Rim',
+            'Pack',
+            'Renteng',
+            'Lembar',
         ];
     
         $currentValue = $data[static::$index % count($data)];

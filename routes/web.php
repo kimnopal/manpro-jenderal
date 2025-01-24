@@ -6,7 +6,6 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\InvoiceDetailController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\KwitansiController;
-use App\Http\Controllers\MasterController;
 use App\Http\Controllers\PembelianController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProyekController;
@@ -14,7 +13,6 @@ use App\Http\Controllers\RekeningController;
 use App\Http\Controllers\SatuanController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\PembayaranController;
-use App\Models\Invoice;
 use Illuminate\Support\Facades\Route;
 
 
@@ -48,6 +46,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/item/edit/{id}', [ItemController::class, 'edit_item'])->name('item.edit');
     Route::put('/item/update/{id}', [ItemController::class, 'update_item'])->name('item.update');
     Route::delete('/item/delete/{id}', [ItemController::class, 'delete_item'])->name('item.delete');
+    Route::post('/item/editsatuan/{id}', [ItemController::class, 'itemsatuan_edit'])->name('itemsatuan.edit');
+    Route::delete('/item/{itemid}/deletesatuan/{id}', [ItemController::class, 'itemsatuan_delete'])->name('itemsatuan.delete');
 
     // Crud Satuan
     Route::get('/satuan', [SatuanController::class, 'index_satuan'])->name('satuan.index');

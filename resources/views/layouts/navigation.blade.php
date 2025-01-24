@@ -56,5 +56,10 @@
                 </li>  
             </ul>
         </div>
+        <form action="{{ route('logout') }}" method="POST">
+            @method('post')
+            @csrf
+            <button class="btn btn-outline-danger">Logout</button>
+        </form>
     </div>
 </nav>

@@ -24,8 +24,16 @@ class Rekening extends Model
 
     public function scopeFilterSupplier(Builder $query) : void {
         
-        $query->whereHas('supplier', function ($supplier_query) {
-            $supplier_query->where('nama_supplier', 'like', '%'.request('search_supplier').'%');
-        });
+        $query
+        ->whereHas('supplier', function ($supplier_query) {
+            $supplier_query->where('nama_supplier', 'like', '%'.request('search_rekening').'%');
+            })
+        ->orWhereHas('bank', function ($bank_query) {
+            $bank_query->where('nama_bank', 'like', '%'.\request('search_rekening').'%');
+            })
+        ->orWhere('nomor_rekening', 'like', '%'.\request('search_rekening').'%');
+        ;
+
+        
     }
 }

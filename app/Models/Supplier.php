@@ -23,7 +23,10 @@ class Supplier extends Model
 
     public function scopeFilternama(Builder $query) : void {
         
-        $query->where('nama_supplier', 'like', '%'.\request('search_nama').'%');
+        $query->where('nama_supplier', 'like', '%'.\request('search_supplier').'%')
+              ->orWhere('alamat_supplier', 'like', '%'.\request('search_supplier').'%')
+              ->orWhere('kontak_supplier', 'like', '%'.\request('search_supplier').'%')
+              ;
     }
 
     public function pembelians() : HasMany{

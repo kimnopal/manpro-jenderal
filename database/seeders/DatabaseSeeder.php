@@ -46,7 +46,8 @@ class DatabaseSeeder extends Seeder
         // Bank::factory()->count(4)->create();
         // Supplier::factory(6)->create();
         Rekening::factory(100)->recycle(Supplier::factory(30)->create())->recycle(Bank::factory()->count(10)->create())->create();
-        Item::factory(50)->recycle(Satuan::factory(10)->create())->create();
+        // Item::factory(30)->recycle()->create();
+        Satuan::factory(10)->create();
         Client::factory(30)->create();
     }
 }

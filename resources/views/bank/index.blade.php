@@ -1,18 +1,19 @@
 <x-app-layout>
-    <div class="d-flex justify-content-between mt-3">
-        <h4>{{ $judul_index_bank }}</h4>
-        <div class="d-flex justify-content-end w-75">
-            <form action="{{ route('bank.index') }}" role="search" class="d-flex me-5 w-50">
-                @csrf
-                <input type="search" class="form-control me-3 border-2 border-success" name="search_bank" placeholder="Cari nama bank" autofocus>
+    <div class="row mt-3">
+        <h4 class="col-4">{{ $judul_index_bank }}</h4>
+        <div class="col-6">
+            <form action="{{ route('bank.index') }}" role="search" class="d-flex">
+                <input type="search" class="form-control me-2 border-2 border-success" name="search_bank" placeholder="Cari nama bank" autofocus>
                 <button class="btn btn-success w-25" type="submit">Cari</button>
             </form>
-            <a href="{{ route('bank.create') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Tambah Bank</a>
+        </div>
+        <div class="col-2 d-flex">
+            <a href="{{ route('bank.create') }}" class="btn btn-primary ms-auto w-100"><i class="fa-solid fa-plus"></i> Tambah Bank</a>
         </div>
     </div>
     <table class="table table-bordered table-striped mt-3">
         <thead class="table-success">
-            <th>No</th>
+            <th width="5%">No</th>
             <th>Nama Bank</th>
             <th width="15%">Action</th>
         </thead>

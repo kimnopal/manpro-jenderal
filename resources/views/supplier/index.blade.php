@@ -1,18 +1,19 @@
 <x-app-layout>
-    <div class="d-flex justify-content-between mt-3">
-        <h4>{{ $judul_index_supplier }}</h4>
-        <div class="d-flex justify-content-end w-75">
-            <form action="{{ route('supplier.index') }}" role="search" class="d-flex me-5 w-50">
-                @csrf
-                <input type="search" class="form-control me-3 border-2 border-success" name="search_nama" placeholder="Cari nama supplier" autofocus>
+    <div class="row mt-3">
+        <h4 class="col-4">{{ $judul_index_supplier }}</h4>
+        <div class="col-6">
+            <form action="{{ route('supplier.index') }}" role="search" class="d-flex">
+                <input type="search" class="form-control me-2 border-2 border-success" name="search_supplier" placeholder="Cari nama, alamat, atau kontak supplier" autofocus>
                 <button class="btn btn-success w-25" type="submit">Cari</button>
             </form>
-            <a href="{{ route('supplier.create') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Tambah Supplier</a>
+        </div>
+        <div class="col-2 d-flex">
+            <a href="{{ route('supplier.create') }}" class="btn btn-primary ms-auto w-100"><i class="fa-solid fa-plus"></i> Tambah Supplier</a>
         </div>
     </div>
     <table class="table table-bordered table-striped mt-3">
         <thead class="table-success">
-            <th>No</th>
+            <th class="5%">No</th>
             <th>Nama supplier</th>
             <th>Alamat Supplier</th>
             <th>Kontak Supplier</th>

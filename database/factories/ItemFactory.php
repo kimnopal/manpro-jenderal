@@ -19,7 +19,7 @@ class ItemFactory extends Factory
     {
         return [
             'nama_item' => $this->faker->word(),
-            'satuan_id' => Satuan::factory(),
+            // 'satuan_id' => Satuan::factory(),
         ];
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Item extends Model
 {
@@ -13,13 +14,17 @@ class Item extends Model
 
     protected $table = 'item';
     
-    public function satuan(): BelongsTo {
-        return $this->belongsTo(Satuan::class);
+    public function satuan(): BelongsToMany {
+
+        return $this->belongsToMany(Satuan::class, 'satuan_item');
     }
 
     public function scopeFilterNama(Builder $query) : void {
         
-        $query->where('nama_item', 'like', '%'.\request('search_item').'%');
+        $query->where('nama_item', 'like', '%'.\request('search_item').'%')
+              ->orWhereHas('satuan', function ($querysatuan) {
+                $querysatuan->where('nama_satuan', 'like', '%'.\request('search_item').'%');
+              });
         
     }
 }

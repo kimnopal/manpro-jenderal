@@ -1,18 +1,19 @@
 <x-app-layout>
-    <div class="d-flex justify-content-between mt-3">
-        <h4>{{ $judul_index_client }}</h4>
-        <div class="d-flex justify-content-end w-75">
-            <form action="{{ route('client.index') }}" role="search" class="d-flex me-5 w-50">
-                @csrf
-                <input type="search" class="form-control me-3 border-2 border-success" name="search_client" placeholder="Cari nama client" autofocus>
-                <button class="btn btn-success w-25">Cari</button>
+    <div class="row mt-3">
+        <h4 class="col-4">{{ $judul_index_client }}</h4>
+        <div class="col-6">
+            <form action="{{ route('client.index') }}" role="search" class="d-flex">
+                <input type="search" class="form-control me-2 border-2 border-success" name="search_client" placeholder="Cari nama, alamat, atau kontak client" autofocus>
+                <button class="btn btn-success w-25" type="submit">Cari</button>
             </form>
-            <a href="{{ route('client.create') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Tambah Client</a>
+        </div>
+        <div class="col-2 d-flex">
+            <a href="{{ route('client.create') }}" class="btn btn-primary ms-auto w-100"><i class="fa-solid fa-plus"></i> Tambah Client</a>
         </div>
     </div>
     <table class="table table-bordered table-striped mt-3">
         <thead class="table-success">
-            <th>No</th>
+            <th width="5%">No</th>
             <th>Nama client</th>
             <th>Alamat client</th>
             <th>Kontak client</th>

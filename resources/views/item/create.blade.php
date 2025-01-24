@@ -21,7 +21,6 @@
         @error('satuan_id')
             <div class="text-danger fst-italic">{{ 'Pilih Satuan Item' }}</div>
         @enderror
-        {{-- <input type="text" name="satuan_id" id="satuan_id" class="form-control mt-2" required> --}}
         <button class="btn btn-success mt-3"><i class="fa-solid fa-arrow-up-from-bracket"></i> Tambah item</button>
     </form>
 </x-app-layout>

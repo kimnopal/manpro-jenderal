@@ -34,8 +34,8 @@ class RekeningController extends Controller
     public function save_rekening(Request $request) : RedirectResponse {
         $validated = $request->validate([
             'nomor_rekening' => 'required',
-            'supplier_id' => 'required',
-            'bank_id' => 'required',
+            'supplier_id' => 'required|exists:supplier,id',
+            'bank_id' => 'required|exists:bank,id',
         ]);
         $rekening = new Rekening();
         $rekening->supplier_id = $request->supplier_id;
@@ -61,8 +61,8 @@ class RekeningController extends Controller
 
     public function update_rekening(Request $request, $id) : RedirectResponse {
         $validated = $request->validate([
-            'supplier_id' => 'required',
-            'bank_id' => 'required',
+            'supplier_id' => 'required|exists:supplier,id',
+            'bank_id' => 'required|exists:bank,id',
             'nomor_rekening' => 'required',
         ]);
         $rekening = Rekening::find($id);

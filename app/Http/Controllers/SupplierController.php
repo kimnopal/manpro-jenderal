@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class SupplierController extends Controller
 {
     public function index_supplier() {
-        $data_supplier = Supplier::filternama()->paginate(5);
+        $data_supplier = Supplier::filternama()->paginate(10);
 
         return \view('supplier.index', [
             'judul_index_supplier' => 'List Data Supplier',
