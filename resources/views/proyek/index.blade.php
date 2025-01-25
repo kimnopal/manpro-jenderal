@@ -24,7 +24,7 @@
         <tbody class="table-group-divider">
             @foreach ($data_proyek as $proyek)
                 <tr>
-                    <td>{{ $proyek['no_proyek'] }}</td>
+                    <td>{{ $proyek['no_proyek'] }}/JSD/I/2025</td>
                     <td>{{ $proyek['tgl_mulai_kontrak'] }}</td>
                     <td>{{ $proyek['tgl_selesai_kontrak'] }}</td>
                     <td>{{ $proyek['klien_id'] }}</td>

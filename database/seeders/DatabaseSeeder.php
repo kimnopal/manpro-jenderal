@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Bank;
 use App\Models\Client;
 use App\Models\Item;
+use App\Models\Proyek;
 use App\Models\Rekening;
 use App\Models\Satuan;
 use App\Models\Supplier;
@@ -49,5 +50,6 @@ class DatabaseSeeder extends Seeder
         // Item::factory(30)->recycle()->create();
         Satuan::factory(10)->create();
         Client::factory(30)->create();
+        Proyek::factory(20)->create();
     }
 }

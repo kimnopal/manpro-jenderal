@@ -22,7 +22,7 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/', function () {
-        return view('welcome');
+        return view('dashboard');
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -98,38 +98,38 @@ Route::middleware('auth')->group(function () {
     Route::delete('/proyek/hapus/{id}', [ProyekController::class, 'hapus_proyek'])->name('proyek.hapus');
 
     //CRUD PEMBAYARAN
-    Route::get('/pembayaran', [PembayaranController::class, 'index_pembayaran'])->name('pembayaran.index');  
-    Route::get('/pembayaran/create-pembayaran', [PembayaranController::class, 'create_pembayaran'])->name('pembayaran.create-pembayaran');  
-    Route::post('/pembayaran/save', [PembayaranController::class, 'save_pembayaran'])->name('pembayaran.save');  
-    Route::get('/pembayaran/edit-pembayaran/{id}', [PembayaranController::class, 'edit_pembayaran'])->name('pembayaran.edit-pembayaran');  
-    Route::put('/pembayaran/update/{id}', [PembayaranController::class, 'update_pembayaran'])->name('pembayaran.update');  
-    Route::get('/pembayaran/delete/{id}', [PembayaranController::class, 'delete_pembayaran'])->name('pembayaran.delete');  
+    Route::get('/pembayaran', [PembayaranController::class, 'index_pembayaran'])->name('pembayaran.index');
+    Route::get('/pembayaran/create-pembayaran', [PembayaranController::class, 'create_pembayaran'])->name('pembayaran.create-pembayaran');
+    Route::post('/pembayaran/save', [PembayaranController::class, 'save_pembayaran'])->name('pembayaran.save');
+    Route::get('/pembayaran/edit-pembayaran/{id}', [PembayaranController::class, 'edit_pembayaran'])->name('pembayaran.edit-pembayaran');
+    Route::put('/pembayaran/update/{id}', [PembayaranController::class, 'update_pembayaran'])->name('pembayaran.update');
+    Route::get('/pembayaran/delete/{id}', [PembayaranController::class, 'delete_pembayaran'])->name('pembayaran.delete');
 
     //CRUD KWITANSI
-    Route::get('/kwitansi', [KwitansiController::class, 'index_kwitansi'])->name('kwitansi.index');  
-    Route::get('/kwitansi/create-kwitansi', [KwitansiController::class, 'create_kwitansi'])->name('kwitansi.create-kwitansi');  
-    Route::post('/kwitansi/', [KwitansiController::class, 'save_kwitansi'])->name('kwitansi.save');  
-    Route::get('/kwitansi/edit-kwitansi/{id}', [KwitansiController::class, 'edit_kwitansi'])->name('kwitansi.edit-kwitansi');  
-    Route::put('/kwitansi/update/{id}', [KwitansiController::class, 'update_kwitansi'])->name('kwitansi.update');  
-    Route::get('/kwitansi/delete/{id}', [KwitansiController::class, 'delete_kwitansi'])->name('kwitansi.delete');  
-    Route::get('/kwitansi/print/{id}', [KwitansiController::class, 'print_kwitansi'])->name('kwitansi.print');  
+    Route::get('/kwitansi', [KwitansiController::class, 'index_kwitansi'])->name('kwitansi.index');
+    Route::get('/kwitansi/create-kwitansi', [KwitansiController::class, 'create_kwitansi'])->name('kwitansi.create-kwitansi');
+    Route::post('/kwitansi/', [KwitansiController::class, 'save_kwitansi'])->name('kwitansi.save');
+    Route::get('/kwitansi/edit-kwitansi/{id}', [KwitansiController::class, 'edit_kwitansi'])->name('kwitansi.edit-kwitansi');
+    Route::put('/kwitansi/update/{id}', [KwitansiController::class, 'update_kwitansi'])->name('kwitansi.update');
+    Route::get('/kwitansi/delete/{id}', [KwitansiController::class, 'delete_kwitansi'])->name('kwitansi.delete');
+    Route::get('/kwitansi/print/{id}', [KwitansiController::class, 'print_kwitansi'])->name('kwitansi.print');
 
 
     //CRUD INVOICE
-    Route::get('/invoice', [InvoiceController::class, 'index_invoice'])->name('invoice.index');  
-    Route::get('/invoice/create', [InvoiceController::class, 'create_invoice'])->name('invoice.create-invoice');  
-    Route::post('/invoice', [InvoiceController::class, 'save_invoice'])->name('invoice.save');  
-    Route::get('/invoice/edit-invoice/{id}', [InvoiceController::class, 'edit_invoice'])->name('invoice.edit-invoice');  
-    Route::put('/invoice/update/{id}', [InvoiceController::class, 'update_invoice'])->name('invoice.update');  
-    Route::get('/invoice/delete/{id}', [InvoiceController::class, 'delete_invoice'])->name('invoice.delete');  
+    Route::get('/invoice', [InvoiceController::class, 'index_invoice'])->name('invoice.index');
+    Route::get('/invoice/create', [InvoiceController::class, 'create_invoice'])->name('invoice.create-invoice');
+    Route::post('/invoice', [InvoiceController::class, 'save_invoice'])->name('invoice.save');
+    Route::get('/invoice/edit-invoice/{id}', [InvoiceController::class, 'edit_invoice'])->name('invoice.edit-invoice');
+    Route::put('/invoice/update/{id}', [InvoiceController::class, 'update_invoice'])->name('invoice.update');
+    Route::get('/invoice/delete/{id}', [InvoiceController::class, 'delete_invoice'])->name('invoice.delete');
 
     //CRUD INVOICE_DETAIL
-    Route::get('/invoice-detail', [InvoiceDetailController::class, 'index_invoice_detail'])->name('invoice_detail.index');  
-    Route::get('/invoice-detail/create', [InvoiceDetailController::class, 'create_invoice_detail'])->name('invoice_detail.create-invoice-detail');  
-    Route::post('/invoice-detail/', [InvoiceDetailController::class, 'save_invoice_detail'])->name('invoice_detail.save');  
-    Route::get('/invoice-detail/edit-invoice-detail/{id}', [InvoiceDetailController::class, 'edit_invoice_detail'])->name('invoice_detail.edit-invoice-detail');  
-    Route::put('/invoice-detail/update/{id}', [InvoiceDetailController::class, 'update_invoice_detail'])->name('invoice_detail.update');  
-    Route::get('/invoice-detail/delete/{id}', [InvoiceDetailController::class, 'delete_invoice_detail'])->name('invoice_detail.delete');  
+    Route::get('/invoice-detail', [InvoiceDetailController::class, 'index_invoice_detail'])->name('invoice_detail.index');
+    Route::get('/invoice-detail/create', [InvoiceDetailController::class, 'create_invoice_detail'])->name('invoice_detail.create-invoice-detail');
+    Route::post('/invoice-detail/', [InvoiceDetailController::class, 'save_invoice_detail'])->name('invoice_detail.save');
+    Route::get('/invoice-detail/edit-invoice-detail/{id}', [InvoiceDetailController::class, 'edit_invoice_detail'])->name('invoice_detail.edit-invoice-detail');
+    Route::put('/invoice-detail/update/{id}', [InvoiceDetailController::class, 'update_invoice_detail'])->name('invoice_detail.update');
+    Route::get('/invoice-detail/delete/{id}', [InvoiceDetailController::class, 'delete_invoice_detail'])->name('invoice_detail.delete');
 });
 
 require __DIR__ . '/auth.php';
