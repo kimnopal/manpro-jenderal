@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('invoice', function (Blueprint $table) {
             $table->id();
-            $table->string('no_invoice');
-            $table->foreignId('nama_client')
+            $table->string('no_invoice')->unique();
+            $table->foreignId('client_id')
                     ->constrained('client')
                     ->cascadeOnUpdate();
             $table->date('tanggal');

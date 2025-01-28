@@ -1,13 +1,15 @@
 <x-app-layout>    
-    <div class="d-flex justify-content-between mt-3">  
-        <h4>Daftar Kwitansi</h4>  
-        <form action="{{ route('kwitansi.index') }}" method="GET" class="d-flex">  
-            <input type="text" name="search" class="form-control" placeholder="Cari..." value="{{ request('search') }}">  
-            <button type="submit" class="btn btn-primary mx-2">Cari</button>  
-        </form>  
-        <a href="{{ route('kwitansi.create-kwitansi') }}" class="btn btn-primary mx-2">  
-            <i class="fa-solid fa-plus"></i> Tambah Kwitansi  
-        </a>  
+<div class="row mt-3">
+        <h4 class="col-4">{{ $judul_index_item }}</h4>
+        <div class="col-6">
+            <form action="{{ route('kwitansi.index') }}" role="search" class="d-flex">
+                <input type="search" class="form-control me-2 border-2 border-success" name="search_kwitansi" placeholder="Cari client atau yang lainnya" autofocus>
+                <button class="btn btn-success w-25">Cari</button>
+            </form>
+        </div>
+        <div class="col-2 d-flex">
+            <a href="{{ route('item.create') }}" class="btn btn-primary ms-auto w-100"><i class="fa-solid fa-plus"></i> Tambah Item</a>
+        </div>
     </div>     
 
     <table class="table table-striped table-bordered mt-3">    

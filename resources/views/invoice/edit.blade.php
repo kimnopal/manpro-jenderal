@@ -7,10 +7,22 @@
   
             <label for="no_invoice" class="form-label">No Invoice:</label>  
             <input type="text" name="no_invoice" class="form-control mb-2" value="{{ $invoice->no_invoice }}" required>  
-  
-            <label for="client" class="form-label">Client:</label>  
-            <input type="text" name="client" class="form-control mb-2" value="{{ $invoice->client }}" required>  
-  
+   
+            <label for="client_id" class="form-label mt-3">Pilih Supplier Pemilik</label>
+            <select name="client_id" id="client_id" class="form-select mt-2 @error('client_id') is-invalid @enderror" >
+            <option value="{{ $invoice->client_id ?? '' }}" selected readonly>
+                {{ $invoice->client->nama_client ?? "Pilih client" }}
+            </option>
+            @foreach ($data_client as $client)
+                <option value="{{ $client->id }}"
+                    @if ($invoice->client_id == $client->id) hidden @endif
+                    {{-- @disabled((App\Models\Invoice::where('client_id', $client->id)->exists()) ?? False) value="{{ $client->id }}" --}}
+                    >
+                    {{ $client->nama_client }}
+                </option>
+            @endforeach
+            </select>
+
             <label for="tanggal" class="form-label">Tanggal:</label>  
             <input type="date" name="tanggal" class="form-control mb-2" value="{{ $invoice->tanggal }}" required>  
   

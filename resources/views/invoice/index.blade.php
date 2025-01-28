@@ -1,10 +1,15 @@
 <x-app-layout>  
-    <div class="d-flex justify-content-between mt-3">  
-        <h4>Daftar Invoice</h4>  
-        <a href="{{ route('invoice.create-invoice') }}" class="btn btn-primary mx-2">  
-            <i class="fa-solid fa-plus"></i> Tambah Invoice  
-        </a>  
-    </div>  
+    <div class="row mt-3">
+        <h4 class="col-4">{{ $judul_index_invoice }}</h4>
+        <div class="col-6">
+            <form action="{{ route('invoice.index') }}" class="d-flex" role="search">
+                <input type="search" class="form-control me-2 border-2 border-success" name="search_invoice" placeholder="Cari sesuatu..."  aria-label="Search" autofocus>
+                <button class="btn btn-success w-25" type="submit">Cari</button>
+            </form>
+        </div>
+        <div class="col-2 d-flex">
+            <a href="{{ route('invoice.create-invoice') }}" class="btn btn-primary ms-auto w-100"><i class="fa-solid fa-plus"></i> Tambah Invoice</a>
+        </div>  
   
     <table class="table mt-3">  
         <thead>  
@@ -25,7 +30,13 @@
                 <tr>  
                     <td>{{ $i++ }}</td>  
                     <td>{{ $invoice->no_invoice }}</td>  
-                    <td>{{ $invoice->client }}</td>  
+                    <td>
+                        @if ($invoice->client_id)
+                            {{ $invoice->client->nama_client }}
+                        @else
+                            Tidak Ada Data
+                        @endif
+                    </td>  
                     <td>{{ $invoice->tanggal }}</td>  
                     <td>{{ $invoice->catatan }}</td>  
                     <td>  
@@ -39,4 +50,5 @@
             @endforeach  
         </tbody>  
     </table>  
+    {{ $data_invoice->onEachSide(1)->links() }}
 </x-app-layout>  
