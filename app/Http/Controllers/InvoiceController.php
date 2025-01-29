@@ -12,7 +12,7 @@ use Illuminate\Http\RedirectResponse;
 class InvoiceController extends Controller
 {
     public function index_invoice() {  
-        $data_invoice = Invoice::with(['client'])->filterInvoice()->paginate(8);
+        $data_invoice = Invoice::with(['client'])->filterInvoice()->paginate(10);
 
         return \view('invoice.index', [  
             'judul_index_invoice' => 'List Data Invoice',  
@@ -68,29 +68,27 @@ class InvoiceController extends Controller
     }  
   
     public function update_invoice(Request $request, $id) : RedirectResponse {  
+        $invoice = Invoice::findOrFail($id);  
+    
         $validate = $request->validate([
-            'no_invoice' => 'required|unique:invoice,no_invoice',
+            'no_invoice' => 'required|unique:invoice,no_invoice,' . $invoice->id, // Tambahkan ignore ID
             'client_id' => 'required|exists:client,id',
             'tanggal' => 'required',
         ]);
- 
-        $invoice = Invoice::findOrFail($id);  
-   
+    
         $userInput = intval($request->no_invoice); // Pastikan ini adalah angka  
-  
         $month = date('m'); // 2 digit bulan  
         $year = date('Y');  // 4 digit tahun  
         $newInvoiceNumber = sprintf('%03d/INV/%s/%s', $userInput, $month, $year); 
-
-        $invoice = Invoice::find($id);  
+    
         $invoice->no_invoice = $newInvoiceNumber;  
         $invoice->client_id = $request->client_id;  
         $invoice->tanggal = $request->tanggal;  
         $invoice->catatan = $request->catatan;  
         $invoice->save();  
-  
-        return Redirect::route('invoice.index');  
-    }  
+    
+        return Redirect::route('invoice.index')->with('success', 'Invoice berhasil diupdate!');  
+    }
   
     public function delete_invoice($id) : RedirectResponse {  
         $invoice = Invoice::find($id);  

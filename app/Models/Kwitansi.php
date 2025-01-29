@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Kwitansi extends Model
 {
@@ -16,17 +17,25 @@ class Kwitansi extends Model
         'tanggal',  
     ];  
   
-    public function client()  
+    public function client(): BelongsTo  
     {  
-        return $this->belongsTo(Client::class, 'client'); 
-    }  
+        return $this->belongsTo(Client::class); 
+    }
+    
+    public function invoice(): BelongsTo  
+    {  
+        return $this->belongsTo(Invoice::class); 
+    }
 
-    public function scopeFilterNama(Builder $query) : void
+    public function scopeFilterKwitansi(Builder $query) : void
     {    
         $query
-        ->where('nama_client', 'like', '%'.\request('search_kwitansi').'%')
-        ->orWhere('alamat_client', 'like', '%'.\request('search_kwitansi').'%')
-        ->orWhere('kontak_client', 'like', '%'.\request('search_kwitansi').'%')
+        ->where('total', 'like', '%'.\request('search_kwitansi').'%')
+        ->orWhere('tujuan', 'like', '%'.\request('search_kwitansi').'%')
+        ->orWhere('tanggal', 'like', '%'.\request('search_kwitansi').'%')
+        ->orWhereHas('client', function ($client_query) {
+            $client_query->where('nama_client', 'like', '%'.\request('search_kwitansi').'%');
+            })
         ;
     }
 }

@@ -12,14 +12,21 @@ class Invoice extends Model
 {
     protected $table = 'invoice';  
 
+    protected $fillable = [  
+        'no_invoice',  
+        'client_id',  
+        'tanggal',  
+        'catatan',  
+    ];
+
     public function client(): BelongsTo  
     {  
         return $this->belongsTo(Client::class);  
     } 
   
-    public function details(): HasMany  
+    public function kwitansi(): HasMany  
     {  
-        return $this->hasMany(InvoiceDetail::class, 'invoice_id'); 
+        return $this->hasMany(Kwitansi::class, 'invoice_id'); 
     }
 
     public function scopeFilterInvoice(Builder $query) : void {

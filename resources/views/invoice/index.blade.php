@@ -11,18 +11,18 @@
             <a href="{{ route('invoice.create-invoice') }}" class="btn btn-primary ms-auto w-100"><i class="fa-solid fa-plus"></i> Tambah Invoice</a>
         </div>  
   
-    <table class="table mt-3">  
-        <thead>  
+    <table class="table table-bordered table-striped mt-3">  
+        <thead class="table-success">  
             <tr>  
-                <th>No.</th>  
-                <th>No Invoice</th>  
-                <th>Client</th>  
-                <th>Tanggal</th>  
+                <th width="5%">No.</th>  
+                <th width="12%">No Invoice</th>  
+                <th width="15%">Client</th>  
+                <th width="19%">Tanggal</th>  
                 <th>Catatan</th>  
-                <th>Aksi</th>  
+                <th width="20%">Aksi</th>  
             </tr>  
         </thead>  
-        <tbody>  
+        <tbody class="table-group-divider">  
             @php
             $i = 1
             @endphp
@@ -37,14 +37,15 @@
                             Tidak Ada Data
                         @endif
                     </td>  
-                    <td>{{ $invoice->tanggal }}</td>  
+                    <td>{{ \Carbon\Carbon::parse($invoice->tanggal)->translatedFormat('l, j F Y') }}</td>  
                     <td>{{ $invoice->catatan }}</td>  
                     <td>  
-                        <a href="{{ route('invoice.edit-invoice', $invoice->id) }}" class="btn btn-warning">Edit</a>  
+                        <a href="{{ route('invoice.edit-invoice', $invoice->id) }}" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen"></i> Edit</a>  
                         <form action="{{ route('invoice.delete', $invoice->id) }}" method="GET" style="display:inline;">  
                             @csrf  
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus?')">Hapus</button>  
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus?')"><i class="fa-solid fa-trash"></i> Hapus</button>  
                         </form>  
+                        <a href="{{ route('invoice_detail.index', $invoice->id) }}" class="btn btn-primary btn-sm"><i class="fa-solid fa-circle-info"></i> Detail</a>
                     </td>  
                 </tr>  
             @endforeach  

@@ -46,7 +46,7 @@
             <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#pembayaran-collapse" aria-expanded="false">
                 Pembayaran
             </button>
-            <div class="collapse" id="pembayaran-collapse">
+            <div class="collapse show" id="pembayaran-collapse">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li><a href="{{ route('invoice.index') }}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Tabel Invoice</a></li>
                     <li><a href="{{ route('kwitansi.index') }}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Tabel Kwitansi</a></li>

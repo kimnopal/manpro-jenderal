@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('kwitansi', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('nama_client')
+            $table->foreignId('client_id')
                     ->constrained('client')
                     ->cascadeOnUpdate();
-            $table->integer('total');
+            $table->decimal('total', 20, 0)->unsigned();
             $table->string('tujuan');
             $table->date('tanggal');
             $table->timestamps();
