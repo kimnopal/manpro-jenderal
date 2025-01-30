@@ -43,7 +43,9 @@ class RekeningController extends Controller
         $rekening->nomor_rekening = $request->nomor_rekening;
         $rekening->save();
 
-        return Redirect::route('rekening.index');
+        return Redirect::route('rekening.index')
+                        ->with('flash_message', 'Rekening Berhasil Dibuat')
+                        ->with('flash_type', 'save');
     }
 
     public function edit_rekening($id) {
@@ -71,13 +73,17 @@ class RekeningController extends Controller
         $rekening->nomor_rekening = $request->nomor_rekening;
         $rekening->save();
         
-        return Redirect::route('rekening.index');
+        return Redirect::route('rekening.index')
+                        ->with('flash_message', 'Rekening Berhasil Diubah')
+                        ->with('flash_type', 'edit');
     }
 
     public function delete_rekening($id) : RedirectResponse {
         $rekening = Rekening::find($id);
         $rekening->delete();
 
-        return Redirect::route('rekening.index');
+        return Redirect::route('rekening.index')
+                        ->with('flash_message', 'Rekening Berhasil Dihapus')
+                        ->with('flash_type', 'delete');
     }
 }

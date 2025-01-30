@@ -103,6 +103,7 @@
 
     <!-- SIde navbar Custom styles for this template -->
     <link href="{{ asset('css/sidebars.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
     <!-- Scripts -->
     @vite(['resources/js/app.js'])
@@ -137,6 +138,7 @@
     </script>
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('js/sidebars.js') }}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

@@ -13,12 +13,18 @@ use App\Http\Controllers\RekeningController;
 use App\Http\Controllers\SatuanController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\SocialiteController;
 use Illuminate\Support\Facades\Route;
 
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::controller(SocialiteController::class)->group(function() {
+    Route::get('/auth/google', 'google_login')->name('auth.google');
+    Route::get('/auth-google-callback', 'google_auth')->name('auth.google-callback');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/', function () {
@@ -79,7 +85,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/rekening/save', [RekeningController::class, 'save_rekening'])->name('rekening.save');
     Route::get('/rekening/edit/{id}', [RekeningController::class, 'edit_rekening'])->name('rekening.edit');
     Route::put('/rekening/update/{id}', [RekeningController::class, 'update_rekening'])->name('rekening.update');
-    Route::delete('/rekening/delete/{id}', [RekeningController::class, 'delete_rekening'])->name('rekening.delete');
+    Route::get('/rekening/delete/{id}', [RekeningController::class, 'delete_rekening'])->name('rekening.delete');
 
     //CRUD Pembelian
     Route::get('/pembelian', [PembelianController::class, 'pembelian_main'])->name('pembelian.pembelian-index');

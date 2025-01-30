@@ -1,4 +1,23 @@
 <x-app-layout>
+    <div class="d-flex justify-content-center">
+        <div class="position-fixed w-75">
+            @if (session('flash_message'))
+                @php
+                    $flashType = session('flash_type');
+                    $alertClass = ($flashType === 'delete') ? 'alert-danger' : 
+                                  (($flashType === 'save') ? 'alert-info' : 'alert-success');
+                @endphp
+                <div class="alert {{ $alertClass }} mt-5 fs-4" id="flash-message">
+                    {{ session('flash_message') }}
+                </div>
+                <script>
+                    setTimeout(() => {
+                        document.getElementById('flash-message').style.display = 'none';
+                    }, 1800);
+                </script>
+            @endif  
+        </div>    
+    </div>
     <div class="row mt-3">
         <h4 class="col-4">{{ $judul_index_rekening }}</h4>
         <div class="col-6">
@@ -54,9 +73,12 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                                         <form action="{{ route('rekening.delete', $rekening->id) }}" method="POST">
-                                            @method('delete')
+                                            @method('get')
                                             @csrf
-                                            <button type="submit" class="btn btn-danger">Hapus</button>
+                                            <button type="button" class="btn btn-danger" 
+                                                onclick="event.preventDefault(); deleteRecord('{{ route('rekening.delete', $rekening->id) }}');">
+                                                Hapus
+                                            </button>
                                         </form>
                                     </div>
                                 </div>
@@ -67,5 +89,19 @@
             @endforeach
         </tbody>
     </table>
-        {{ $data_rekening->onEachSide(1)->links() }}
+                {{ $data_rekening->onEachSide(1)->links() }}
+<script>
+    function deleteRecord(url) {
+        Swal.fire({
+            title: "Deleted",
+            text: "File telah dihapus",
+            icon: 'success',
+            showConfirmButton: true
+        }).then((result) => {
+            if(result.isConfirmed || result.dismiss === Swal.DismissReason.backdrop) {
+                window.location.href = url;
+            }
+        })
+    };
+</script>
 </x-app-layout>

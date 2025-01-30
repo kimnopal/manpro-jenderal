@@ -1,5 +1,5 @@
 <x-app-layout>    
-    <div class="row mt-3">
+<div class="row mt-3">
         <h4 class="col-4">{{ $judul_index_kwitansi }}</h4>
         <div class="col-6">
             <form action="{{ route('kwitansi.index') }}" role="search" class="d-flex">
