@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Client;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,7 +21,8 @@ class ProyekFactory extends Factory
             'no_proyek' => $this->faker->randomNumber(3),
             'tgl_mulai_kontrak' => $this->faker->date(),
             'tgl_selesai_kontrak' => $this->faker->date(),
-            'klien_id' => $this->faker->randomNumber(3),
+            // 'klien_id' => Client::factory(),
+            'klien_id' => $this->faker->randomElement(Client::pluck('id')->toArray()),
             'termin' => $this->faker->date(),
             'biaya' => $this->faker->numberBetween(50, 100) * 1000,
             'pajak' => $this->faker->numberBetween(1, 10) * 1000,

@@ -16,7 +16,12 @@ return new class extends Migration
             $table->string('no_proyek')->unique();
             $table->date('tgl_mulai_kontrak');
             $table->date('tgl_selesai_kontrak');
-            $table->unsignedBigInteger('klien_id');
+            // $table->unsignedBigInteger('klien_id');
+            // $table->foreign('klien_id')->references('id')->on('clients')->onDelete('cascade');
+            $table->foreignId('klien_id')
+                  ->constrained(table: 'client', indexName: 'proyek_klien_id')
+                  ->onDelete('cascade');;
+            // $table->unsignedBigInteger('klien_id');
             $table->date('termin');
             $table->decimal('biaya', 15, 2)->default(0);
             $table->decimal('pajak', 15, 2)->default(0);

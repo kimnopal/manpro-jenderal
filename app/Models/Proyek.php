@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Proyek extends Model
 {
@@ -19,5 +20,9 @@ class Proyek extends Model
     public function scopeFilterNama(Builder $query) : void {
 
         $query->where('no_proyek', 'like', '%'.\request('search_proyek').'%');
+    }
+
+    public function client(): BelongsTo {
+        return $this->belongsTo(Client::class, 'klien_id');
     }
 }
