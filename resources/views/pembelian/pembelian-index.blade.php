@@ -13,11 +13,11 @@
     <table class="table table-bordered table-striped mt-3">
         <thead class="table-success">
             <th>No</th>
-            <th>Proyek ID</th>
+            <th>No Proyek</th>
             <th>QTY</th>
-            <th>Satuan ID</th>
+            <th>Nama Satuan</th>
             <th>Harga Beli</th>
-            <th>Supplier ID</th>
+            <th>Nama Supplier</th>
             <th>Action</th>
         </thead>
         <tbody class="table-group-divider">
@@ -27,11 +27,11 @@
             @foreach ($data_pembelian as $pembelian)
                 <tr>
                     <td>{{ $i++ }}</td>
-                    <td>{{ $pembelian->proyekid }}</td>
+                    <td>{{ $pembelian->proyek->no_proyek }}</td>
                     <td>{{ $pembelian->qty }}</td>
-                    <td>{{ $pembelian->satuanid }}</td>
-                    <td>{{ $pembelian->hargabeli }}</td>
-                    <td>{{ $pembelian->supplierid }}</td>
+                    <td>{{ $pembelian->satuan->nama_satuan }}</td>
+                    <td>Rp.{{ number_format($pembelian->hargabeli, 2, ',', '.') }}</td>
+                    <td>{{ $pembelian->supplier->nama_supplier }}</td>
                     <td class="d-flex flex-row">
                         <a href="{{ route('pembelian.edit-pembelian', $pembelian->id) }}" class="btn btn-warning btn-sm"><i class="fa-solid fa-edit"></i> Edit</a>
                         <form action="{{ route('pembelian.delete', $pembelian->id) }}" method="POST" class="m-auto">

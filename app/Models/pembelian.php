@@ -12,16 +12,17 @@ class pembelian extends Model
     protected $table = 'pembelian';
     
     public function supplier() : BelongsTo{
-        return $this->belongsTo(Supplier::class);
+        return $this->belongsTo(Supplier::class, 'supplierid');
     }
     public function proyek() : BelongsTo{
-        return $this->belongsTo(Proyek::class);
+        return $this->belongsTo(Proyek::class, 'proyekid');
     }
     public function satuan() : BelongsTo{
-        return $this->belongsTo(Satuan::class);
+        return $this->belongsTo(Satuan::class, 'satuanid');
     }
     public function scopeFilterNama(Builder $query) : void {
         
-        $query->where('proyekid', 'like', '%'.\request('search_pembelian').'%');
+        $query
+        ->where('proyekid', 'like', '%'.\request('search_pembelian').'%');
     }
 }

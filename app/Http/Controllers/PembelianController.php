@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 class PembelianController extends Controller
 {
     public function pembelian_main() {
-        $data_pembelian = pembelian::with(['satuan'])->filternama()->paginate(10);
+        $data_pembelian = pembelian::with(['satuan', 'proyek', 'supplier'])->filternama()->paginate(10);
 
         return \view('pembelian.pembelian-index',[
         'judul_pembelian_index' => 'List Data Pembelian',
