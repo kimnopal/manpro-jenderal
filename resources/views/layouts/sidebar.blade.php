@@ -6,13 +6,13 @@
 
     <ul class="list-unstyled">
         @php
-            $active_data_master = Request::is('client*') || 
+            $active_data_master = Request::is('client*') ||
                             Request::is('item*') ||
                             Request::is('satuan*') ||
                             Request::is('bank*') ||
                             Request::is('supplier*') ||
                             Request::is('rekening*');
-            
+
             $active_pembelian = Request::is('pembelian*');
 
             $active_proyek = Request::is('proyek*');
@@ -26,7 +26,7 @@
                 Data Master
             </button>
             <div class="collapse {{ $active_data_master ? 'show' : '' }}" id="master-collapse">
-                
+
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ">
                     <li><a href="{{ route('client.index') }}" class="link-body-emphasis d-inline-flex text-decoration-none rounded fs-6 {{ Request::is('client*') ? 'bg-primary text-white' : '' }}">
                         Tabel Client</a>

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 class ProyekController extends Controller
 {
     public function index_proyek() {
-        $data_proyek = Proyek::filterNama()->paginate(5);
+        $data_proyek = Proyek::with('client')->filterNama()->paginate(5);
         return view('proyek.index', [
             'judul_index_proyek' => 'Daftar Proyek',
             'data_proyek' => $data_proyek
