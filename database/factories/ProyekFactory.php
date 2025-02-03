@@ -18,12 +18,12 @@ class ProyekFactory extends Factory
     public function definition(): array
     {
         return [
-            'no_proyek' => $this->faker->randomNumber(3),
+            'no_proyek' => $this->faker->randomNumber(3) .'/JSD/I/2025',
             'tgl_mulai_kontrak' => $this->faker->date(),
             'tgl_selesai_kontrak' => $this->faker->date(),
             // 'klien_id' => Client::factory(),
             'klien_id' => $this->faker->randomElement(Client::pluck('id')->toArray()),
-            'termin' => $this->faker->date(),
+            'termin' => $this->faker->randomNumber(1),
             'biaya' => $this->faker->numberBetween(50, 100) * 1000,
             'pajak' => $this->faker->numberBetween(1, 10) * 1000,
             'biaya_lain' => $this->faker->numberBetween(10, 20) * 1000,

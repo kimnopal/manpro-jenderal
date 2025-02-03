@@ -22,7 +22,7 @@ return new class extends Migration
                   ->constrained(table: 'client', indexName: 'proyek_klien_id')
                   ->onDelete('cascade');;
             // $table->unsignedBigInteger('klien_id');
-            $table->date('termin');
+            $table->integer('termin');
             $table->decimal('biaya', 15, 2)->default(0);
             $table->decimal('pajak', 15, 2)->default(0);
             $table->decimal('biaya_lain', 15, 2)->default(0);

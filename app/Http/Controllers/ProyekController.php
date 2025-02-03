@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use App\Models\Proyek;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -17,8 +18,10 @@ class ProyekController extends Controller
         ]);
     }
     public function tambah_proyek() {
+        $data_klien = Client::all();
         return view('proyek.create', [
-            'judul_tambah_proyek' => 'Tambah Proyek'
+            'judul_tambah_proyek' => 'Tambah Proyek',
+            'data_klien'=>$data_klien
         ]);
     }
     public function simpan_proyek(Request $req) : RedirectResponse{
@@ -39,9 +42,11 @@ class ProyekController extends Controller
     }
     public function ubah_proyek($id) {
         $proyek = Proyek::where('id', $id)->first();
+        $data_klien = Client::all();
         return view('proyek.ubah', [
             'judul_ubah_proyek'=>'Ubah detail proyek',
-            'proyek'=>$proyek
+            'proyek'=>$proyek,
+            'data_klien'=>$data_klien
         ]);
     }
     public function update_proyek(Request $req, $id) {

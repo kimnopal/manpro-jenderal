@@ -18,8 +18,12 @@ class Proyek extends Model
     }
 
     public function scopeFilterNama(Builder $query) : void {
-
-        $query->where('no_proyek', 'like', '%'.\request('search_proyek').'%');
+        $query
+        ->whereHas('client', function ($proyek_query) {
+            $proyek_query->where('nama_client', 'like', '%'.request('search_proyek').'%');
+            })
+        ->orWhere('no_proyek', 'like', '%'.\request('search_proyek').'%');
+        ;
     }
 
     public function client(): BelongsTo {

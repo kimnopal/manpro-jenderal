@@ -16,11 +16,21 @@
         <label for="tgl_selesai_kontrak" class="form-label mt-2">Tanggal selesai kontrak: </label>
         <input type="date" name="tgl_selesai_kontrak" id="tgl_selesai_kontrak" class="form-control" autofocus required>
 
-        <label for="klien_id" class="form-label mt-2">Klien ID: </label>
-        <input type="text" name="klien_id" id="klien_id" class="form-control" autofocus required>
+        <label for="klien_id" class="form-label mt-2">Nama client: </label>
+        {{-- <input type="text" name="klien_id" id="klien_id" class="form-control" autofocus required> --}}
+        <select name="klien_id" id="klien_id" class="form-select mt-2" >
+            <option value="" selected disabled>Pilih Client</option>
+            @foreach ($data_klien as $klien)
+                <option value="{{ $klien->id }}">
+                    {{-- @disabled(optional($supplier->rekening)->supplier_id && $supplier->id == optional($supplier->rekening)->supplier_id)> --}}
+                    {{-- @disabled(($supplier->rekening) ? ($supplier->rekening->supplier_id == $supplier->id) : False) --}}
+                    {{ $klien->nama_client }}
+                </option>
+            @endforeach
+        </select>
 
         <label for="termin" class="form-label mt-2">Termin: </label>
-        <input type="date" name="termin" id="termin" class="form-control" autofocus required>
+        <input type="text" name="termin" id="termin" class="form-control" autofocus required>
 
         <label for="biaya" class="form-label mt-2">Biaya: </label>
         <input type="text" name="biaya" id="biaya" class="form-control" autofocus required>

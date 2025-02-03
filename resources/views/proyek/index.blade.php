@@ -53,7 +53,7 @@
                 <th>No. Proyek</th>
                 <th>Mulai Proyek</th>
                 <th>Selesai Proyek</th>
-                <th>Klien ID</th>
+                <th>Klien</th>
                 <th>Termin</th>
                 <th>Biaya</th>
                 <th>Pajak</th>
@@ -64,11 +64,11 @@
         <tbody>
             @foreach($data_proyek as $proyek)
                 <tr class="text-center">
-                    <td>{{ $proyek->no_proyek }}/JSD/I/2025</td>
+                    <td>{{ $proyek->no_proyek }}</td>
                     <td>{{ \Carbon\Carbon::parse($proyek->tgl_mulai_kontrak)->format('j M Y') }}</td>
                     <td>{{ \Carbon\Carbon::parse($proyek->tgl_selesai_kontrak)->format('j M Y') }}</td>
-                    <td>{{ $proyek->client->id }}</td>
-                    <td>{{ \Carbon\Carbon::parse($proyek->termin)->format('j M Y') }}</td>
+                    <td>{{ $proyek->client->nama_client }}</td>
+                    <td>{{ $proyek->termin }}</td>
                     <td>Rp.{{ number_format( $proyek->biaya, 2, ',', '.' ) }}</td>
                     <td>Rp.{{ number_format( $proyek->pajak, 2, ',', '.' ) }}</td>
                     <td>Rp.{{ number_format( $proyek->biaya_lain, 2, ',', '.') }}</td>
