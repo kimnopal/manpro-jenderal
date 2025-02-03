@@ -10,7 +10,7 @@
     <form action="{{ route('pembelian.update', $pembelian->id) }}" method="POST" class="mt-3 border border-2 rounded p-4 bg-warning bg-gradient bg-opacity-25">
         @method('put')
         @csrf
-        <label for="proyekid" class="form-label mt-3">Proyek ID : </label>
+        <label for="proyekid" class="form-label mt-3">Nomor Proyek : </label>
         <select class="form-select mt-2 @error('proyekid') is-invalid @enderror" name="proyekid" id="proyekid" aria-label="Default select example">
             <option value="" disabled selected>Pilih Item</option>
             @foreach ($data_proyek as $proyek)
@@ -27,7 +27,7 @@
         <label for="qty" class="form-label">Jumlah Barang : </label>
         <input type="text" name="qty" id="qty" class="form-control mt-2" autofocus required value="{{ $pembelian->qty }}">
         
-        <label for="satuanid" class="form-label mt-3">Satuan ID : </label>
+        <label for="satuanid" class="form-label mt-3">Nama Satuan : </label>
         <select class="form-select mt-2 @error('satuanid') is-invalid @enderror" name="satuanid" id="satuanid" aria-label="Default select example">
             <option value="" disabled selected>Pilih Item</option>
             @foreach ($data_satuan as $satuan)
@@ -41,10 +41,10 @@
             <div class="text-danger fst-italic">{{ 'Pilih Satuan Item' }}</div>
         @enderror
         
-        <label for="satuanid" class="form-label">Satuan ID : </label>
-        <input type="text" name="satuanid" id="satuanid" class="form-control mt-2" autofocus required value="{{ $pembelian->satuanid }}">
+        <label for="hargabeli" class="form-label">Harga Beli : </label>
+        <input type="text" name="hargabeli" id="hargabeli" class="form-control mt-2" autofocus required value="{{ $pembelian->hargabeli }}">
         
-        <label for="supplierid" class="form-label mt-3">Supplier ID : </label>
+        <label for="supplierid" class="form-label mt-3">Nama Supplier : </label>
         <select class="form-select mt-2 @error('supplierid') is-invalid @enderror" name="supplierid" id="supplierid" aria-label="Default select example">
             <option value="" disabled selected>Pilih Supplier</option>
             @foreach ($data_supplier as $supplier)
