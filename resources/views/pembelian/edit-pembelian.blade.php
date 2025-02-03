@@ -16,11 +16,11 @@
             @foreach ($data_proyek as $proyek)
                 <option value="{{ $proyek->id }}" 
                     @selected($proyek->id == $pembelian->proyekid)>
-                    {{ $proyek->klien_id }}
+                    {{ $proyek->no_proyek }}
                 </option>
             @endforeach
         </select>
-        @error('satuan_id')
+        @error('proyekid')
             <div class="text-danger fst-italic">{{ 'Pilih Satuan Item' }}</div>
         @enderror
         
@@ -37,7 +37,7 @@
                 </option>
             @endforeach
         </select>
-        @error('satuan_id')
+        @error('satuanid')
             <div class="text-danger fst-italic">{{ 'Pilih Satuan Item' }}</div>
         @enderror
         
@@ -49,12 +49,12 @@
             <option value="" disabled selected>Pilih Supplier</option>
             @foreach ($data_supplier as $supplier)
                 <option value="{{ $supplier->id }}" 
-                    @selected($supplier->id == $pembelian->proyekid)>
-                    {{ $proyek->klien_id }}
+                    @selected($supplier->id == $pembelian->supplierid)>
+                    {{ $supplier->nama_supplier }}
                 </option>
             @endforeach
         </select>
-        @error('satuan_id')
+        @error('supplierid')
             <div class="text-danger fst-italic">{{ 'Pilih Satuan Item' }}</div>
         @enderror
         

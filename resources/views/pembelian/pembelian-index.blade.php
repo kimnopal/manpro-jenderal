@@ -30,7 +30,7 @@
                     <td>{{ $pembelian->proyek->no_proyek }}</td>
                     <td>{{ $pembelian->qty }}</td>
                     <td>{{ $pembelian->satuan->nama_satuan }}</td>
-                    <td>Rp.{{ $pembelian->hargabeli }}</td>
+                    <td>Rp.{{ number_format($pembelian->hargabeli, 2, ',', '.') }}</td>
                     <td>{{ $pembelian->supplier->nama_supplier }}</td>
                     <td class="d-flex flex-row">
                         <a href="{{ route('pembelian.edit-pembelian', $pembelian->id) }}" class="btn btn-warning btn-sm"><i class="fa-solid fa-edit"></i> Edit</a>
