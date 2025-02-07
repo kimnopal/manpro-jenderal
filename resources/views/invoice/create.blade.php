@@ -20,14 +20,14 @@
 
                     <!-- Client -->
                     <div class="mb-3">
-                        <label for="client_id" class="form-label">Client:</label>
-                        <select name="client_id" id="client_id" class="form-select @error('client_id') is-invalid @enderror" required>
-                            <option value="" selected disabled>Pilih Client yang bersangkutan</option>
-                            @foreach ($data_client as $client)
-                                <option value="{{ $client->id }}">{{ $client->nama_client }}</option>
+                        <label for="proyek_id" class="form-label">No Proyek:</label>
+                        <select name="proyek_id" id="proyek_id" class="form-select @error('proyek_id') is-invalid @enderror" required>
+                            <option value="" selected disabled>Pilih proyek yang bersangkutan</option>
+                            @foreach ($data_proyek as $proyek)
+                                <option value="{{ $proyek->id }}">{{ $proyek->no_proyek }}</option>
                             @endforeach
                         </select>
-                        @error('client_id')
+                        @error('proyek_id')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>

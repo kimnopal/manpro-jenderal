@@ -25,7 +25,7 @@
         </thead>    
         <tbody class="table-group-divider">    
             @php  
-            $i = 1  
+            $i = ($data_kwitansi->currentPage() - 1) * $data_kwitansi->perPage() + 1;
             @endphp  
             @foreach($data_kwitansi as $kwitansi)    
                 <tr>  

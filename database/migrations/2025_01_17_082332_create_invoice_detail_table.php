@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('invoice_detail', function (Blueprint $table) {
             $table->id();
-            $table->integer('invoice_id');
+            $table->foreignId('invoice_id')
+                ->constrained('invoice')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete(); // Tambahkan cascadeOnDelete untuk menghapus detail jika invoice dihapus
             $table->string('deskripsi');
             $table->integer('harga');
             $table->integer('qty');
@@ -21,7 +24,7 @@ return new class extends Migration
             $table->timestamps();
         });
     }
-
+    
     /**
      * Reverse the migrations.
      */
