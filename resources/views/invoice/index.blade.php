@@ -3,7 +3,7 @@
         <h4 class="col-4">{{ $judul_index_invoice }}</h4>
         <div class="col-6">
             <form action="{{ route('invoice.index') }}" class="d-flex" role="search">
-                <input type="search" class="form-control me-2 border-2 border-success" name="search_invoice" value="{{ request('search_invoice') }}" placeholder="Cari sesuatu..."  aria-label="Search" autofocus>
+                <input type="search" class="form-control me-2 border-2 border-success" name="search_invoice" placeholder="Cari sesuatu..."  aria-label="Search" autofocus>
                 <button class="btn btn-success w-25" type="submit">Cari</button>
             </form>
         </div>
@@ -60,5 +60,5 @@
             @endforeach  
         </tbody>  
     </table>  
-    {{ $data_invoice->appends(['search_invoice' => request('search_invoice')])->links() }}
+    {{ $data_invoice->onEachSide(1)->links() }}
 </x-app-layout>  
