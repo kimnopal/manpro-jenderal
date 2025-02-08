@@ -22,7 +22,7 @@ class Invoice extends Model
         'catatan',  
     ];
 
-    public function client(): BelongsTo  
+    public function client()  
     {  
         return $this->belongsTo(Client::class);  
     } 
@@ -32,13 +32,14 @@ class Invoice extends Model
         return $this->hasMany(Kwitansi::class, 'invoice_id'); 
     }
 
-    public function detail() {
+    public function detail() 
+    {
         return $this->hasMany(InvoiceDetail::class); // Jika satu invoice punya banyak detail
     }
     
-    public function proyek(): BelongsTo
+    public function proyek()
     {
-        return $this->belongsTo(Proyek::class, 'proyek_id');
+        return $this->belongsTo(Proyek::class);
     }
     
     public function scopeFilterInvoice(Builder $query) : void {
@@ -47,11 +48,15 @@ class Invoice extends Model
         ->where('no_invoice', 'like', '%'.\request('search_invoice').'%')
         ->orWhere('tanggal', 'like', '%'.\request('search_invoice').'%')
         ->orWhere('catatan', 'like', '%'.\request('search_invoice').'%')
-        ->orWhereHas('proyek_id', function ($client_query) {
-            $client_query->where('nama_client', 'like', '%'.\request('search_invoice').'%');
+        ->orWhereHas('proyek', function ($proyek_query) {
+            $proyek_query->whereHas('client', function ($client_query){
+                $client_query->where('nama_client', 'like', '%'.\request('search_invoice'));
+            });
+            })
+        ->orwhereHas('proyek', function ($proyek_query) {
+            $proyek_query->where('no_proyek', 'like', '%'.request('search_invoice').'%');
             })
         ;
-
     }
     
 }

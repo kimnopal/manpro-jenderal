@@ -30,7 +30,7 @@ class Proyek extends Model
         return $this->belongsTo(Client::class, 'klien_id');
     }
 
-    public function invoices()
+    public function invoice(): HasMany
     {
         return $this->hasMany(Invoice::class, 'proyek_id');
     }

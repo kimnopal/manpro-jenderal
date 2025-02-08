@@ -81,7 +81,7 @@ class InvoiceController extends Controller
         $userInput = intval($request->no_invoice);  
         $month = date('m');  
         $year = date('Y');  
-        $newInvoiceNumber = sprintf('%03d/INV/%s/%s', $userInput, $month, $year); 
+        $newInvoiceNumber = sprintf('%03d/JSD/INV/%s/%s', $userInput, $month, $year); 
     
         $invoice->no_invoice = $newInvoiceNumber;  
         $invoice->proyek_id = $request->proyek_id;  

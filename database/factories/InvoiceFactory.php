@@ -20,7 +20,10 @@ class InvoiceFactory extends Factory
     public function definition(): array
     {
         return [
-            'no_invoice' => Supplier::factory(),
+            'no_invoice' => $this->faker->unique()->randomNumber(3, true) . '/JSD/INV/' 
+                . now()->format('m')  
+                . '/' 
+                . now()->format('Y'), 
             'proyek_id' => Proyek::factory(),
             'tanggal' => $this->faker->date(),
             'catatan' => $this->faker->sentence,
