@@ -1,4 +1,4 @@
-<div class="flex-shrink-0 p-3 ps-0 bg-info-subtle position-sticky vh-100 ms-0">
+<div class="flex-shrink-0 p-3 ps-0 position-sticky vh-100 ms-0">
     <a href="{{ route('dashboard') }}" class="d-flex align-items-center mb-3 link-body-emphasis text-decoration-none border-bottom">
         <svg class="bi pe-none me-2" width="10" height="24"><use xlink:href="#bootstrap"/></svg>
         <span class="fs-4 fw-semibold">Manpro Jenderal</span>

@@ -50,7 +50,7 @@ class Invoice extends Model
         ->orWhere('catatan', 'like', '%'.\request('search_invoice').'%')
         ->orWhereHas('proyek', function ($proyek_query) {
             $proyek_query->whereHas('client', function ($client_query){
-                $client_query->where('nama_client', 'like', '%'.\request('search_invoice'));
+                $client_query->where('nama_client', 'like', '%'.\request('search_invoice').'%');
             });
             })
         ->orwhereHas('proyek', function ($proyek_query) {

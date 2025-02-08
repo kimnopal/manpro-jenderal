@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class RekeningController extends Controller
 {
     public function index_rekening() {
-        $data_rekening = Rekening::with(['supplier', 'bank'])->filterSupplier()->paginate(10);
+        $data_rekening = Rekening::with(['supplier', 'bank'])->filterSupplier()->latest()->paginate(10)->withQueryString();
 
         return \view('rekening.index', [
             'judul_index_rekening' => 'List Data Rekening',
@@ -33,10 +33,39 @@ class RekeningController extends Controller
 
     public function save_rekening(Request $request) : RedirectResponse {
         $validated = $request->validate([
-            'nomor_rekening' => 'required',
+            'nomor_rekening' => 'required|integer',
             'supplier_id' => 'required|exists:supplier,id',
             'bank_id' => 'required|exists:bank,id',
+        ],
+        [
+            'nomor_rekening.required' => 'Nomor rekening perlu diisi',
+            'nomor_rekening.integer' => 'Nomor rekening hanya diisi angka'
         ]);
+        $cek_rekening = Rekening::where('nomor_rekening', $request->nomor_rekening)->exists();
+        $cek_bank = Rekening::where('bank_id', $request->bank_id)
+                                ->where('nomor_rekening', $request->nomor_rekening)
+                                ->exists();
+        $cek_supplier = Rekening::where('supplier_id', $request->supplier_id)
+                                ->where('nomor_rekening', $request->nomor_rekening)
+                                ->exists();
+        if ($cek_bank) {
+            return Redirect::back()
+                            ->with('create_error', 'Data sudah ada!')
+                            ->with('error_message', 'Nomor rekening untuk bank yang dipilih sudah ada')
+                            ->withInput();
+        }
+        else if ($cek_supplier) {
+            return Redirect::back()
+                            ->with('create_error', 'Data sudah ada!')
+                            ->with('error_message', 'Nomor rekening untuk supplier yang dipilih sudah ada')
+                            ->withInput();
+        }
+        else if ($cek_rekening) {
+            return Redirect::back()
+                            ->with('create_error', 'Data sudah ada!')
+                            ->with('error_message', 'Nomor rekening sudah ada')
+                            ->withInput();
+        }
         $rekening = new Rekening();
         $rekening->supplier_id = $request->supplier_id;
         $rekening->bank_id = $request->bank_id;
@@ -45,7 +74,7 @@ class RekeningController extends Controller
 
         return Redirect::route('rekening.index')
                         ->with('flash_message', 'Rekening Berhasil Dibuat')
-                        ->with('flash_type', 'save');
+                        ->with('flash_type', 'Saved!');
     }
 
     public function edit_rekening($id) {
@@ -65,8 +94,45 @@ class RekeningController extends Controller
         $validated = $request->validate([
             'supplier_id' => 'required|exists:supplier,id',
             'bank_id' => 'required|exists:bank,id',
-            'nomor_rekening' => 'required',
+            'nomor_rekening' => 'required|integer',
+        ],
+        [
+            'nomor_rekening.required' => 'Nomor rekening perlu diisi',
+            'nomor_rekening.integer' => 'Nomor rekening hanya diisi angka'
         ]);
+        $cek_rekening = Rekening::where('nomor_rekening', $request->nomor_rekening)
+                                ->where('supplier_id', $request->supplier_id)
+                                ->where('bank_id', $request->bank_id)
+                                ->doesntExist();
+        $cek_supplier = Rekening::where('supplier_id', $request->supplier_id)
+                                ->where('nomor_rekening', $request->nomor_rekening)
+                                ->exists();
+        $cek_bank = Rekening::where('bank_id', $request->bank_id)
+                            ->where('nomor_rekening', $request->nomor_rekening)
+                            ->exists();
+        $cek_duplikasi = Rekening::where('nomor_rekening', $request->nomor_rekening)
+                                ->exists();
+        if ($cek_rekening) {
+            if ($cek_supplier) {
+                return Redirect::back()
+                                ->withInput()
+                                ->with('save_error', 'Gagal Mengubah Data')
+                                ->with('error_message', 'Nomor rekening untuk supplier yang dipilih sudah ada');
+            } 
+            else if ($cek_bank) {
+                return Redirect::back()
+                                ->withInput()
+                                ->with('save_error', 'Gagal Mengubah Data')
+                                ->with('error_message', 'Nomor rekening untuk bank yang dipilih sudah ada');
+            }
+            else if ($cek_duplikasi) {
+                return Redirect::back()
+                                ->withInput()
+                                ->with('save_error', 'Gagal Mengubah Data')
+                                ->with('error_message', 'Nomor rekening sudah ada');
+            }
+        }
+        
         $rekening = Rekening::find($id);
         $rekening->supplier_id = $request->supplier_id;
         $rekening->bank_id = $request->bank_id;
@@ -75,7 +141,7 @@ class RekeningController extends Controller
         
         return Redirect::route('rekening.index')
                         ->with('flash_message', 'Rekening Berhasil Diubah')
-                        ->with('flash_type', 'edit');
+                        ->with('flash_type', 'Updated!');
     }
 
     public function delete_rekening($id) : RedirectResponse {
@@ -84,6 +150,6 @@ class RekeningController extends Controller
 
         return Redirect::route('rekening.index')
                         ->with('flash_message', 'Rekening Berhasil Dihapus')
-                        ->with('flash_type', 'delete');
+                        ->with('flash_type', 'Deleted!');
     }
 }

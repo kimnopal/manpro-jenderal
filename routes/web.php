@@ -85,7 +85,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/rekening/save', [RekeningController::class, 'save_rekening'])->name('rekening.save');
     Route::get('/rekening/edit/{id}', [RekeningController::class, 'edit_rekening'])->name('rekening.edit');
     Route::put('/rekening/update/{id}', [RekeningController::class, 'update_rekening'])->name('rekening.update');
-    Route::get('/rekening/delete/{id}', [RekeningController::class, 'delete_rekening'])->name('rekening.delete');
+    Route::delete('/rekening/delete/{id}', [RekeningController::class, 'delete_rekening'])->name('rekening.delete');
 
     //CRUD Pembelian
     Route::get('/pembelian', [PembelianController::class, 'pembelian_main'])->name('pembelian.pembelian-index');

@@ -12,7 +12,7 @@ class ClientController extends Controller
 
     // Controller Client
     public function index_client() {
-        $data_client = Client::filternama()->paginate(5);
+        $data_client = Client::filternama()->latest()->paginate(5)->withQueryString();
 
         return \view('client.index', [
             'judul_index_client' => 'List Data Client',
@@ -39,7 +39,9 @@ class ClientController extends Controller
         $client->kontak_client = $request->kontak_client;
         $client->save();
 
-        return Redirect::route('client.index');
+        return Redirect::route('client.index')
+                        ->with('flash_message', 'Client Berhasil Dibuat')
+                        ->with('flash_type', 'Saved!');
     }
 
     public function edit_client($id) {
@@ -63,14 +65,18 @@ class ClientController extends Controller
         $client->kontak_client = $request->kontak_client;
         $client->save();
 
-        return Redirect::route('client.index');
+        return Redirect::route('client.index')
+                        ->with('flash_message', 'Client Berhasil Diubah')
+                        ->with('flash_type', 'Updated!');
     }
 
     public function delete_client($id) : RedirectResponse {
         $client = Client::find($id);
         $client->delete();
 
-        return Redirect::route('client.index');
+        return Redirect::route('client.index')
+                        ->with('flash_message', 'Client Berhasil Dihapus')
+                        ->with('flash_type', 'Deleted!');
     }
 
 }

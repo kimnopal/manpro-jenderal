@@ -10,9 +10,9 @@
         @method('put')
         @csrf
         <label for="nomor_rekening" class="form-label mt-3" >Nomor Rekening : </label>
-        <input type="text" name="nomor_rekening" id="nomor_rekening" class="form-control mt-2 @error('nomor_rekening') is-invalid @enderror " value="{{ $rekening->nomor_rekening }}" >
+        <input type="text" name="nomor_rekening" id="nomor_rekening" class="form-control mt-2 @error('nomor_rekening') is-invalid @enderror " value="{{ $rekening->nomor_rekening }}" autofocus >
         @error('nomor_rekening')
-            <div class="text-danger fst-italic">{{ 'Nomor Rekening Perlu Diisi' }}</div>
+            <div class="text-danger fst-italic">{{ $message }}</div>
         @enderror
         <label for="supplier_id" class="form-label mt-3">Pilih Supplier Pemilik</label>
         <select name="supplier_id" id="supplier_id" class="form-select mt-2 @error('supplier_id') is-invalid @enderror" >
@@ -49,4 +49,16 @@
         @enderror
         <button type="submit" class="btn btn-success mt-3"><i class="fa-solid fa-floppy-disk"></i> Simpan Perubahan</button>
     </form>
+    @if (session('save_error'))
+        <script>
+            window.addEventListener('load', function () {
+                Swal.fire({
+                    title   : "{{ session('save_error') }}",
+                    text    : "{{ session('error_message') }}",
+                    icon    : 'error',
+                    showConfirmButton : true
+                })
+            })
+        </script>
+    @endif
 </x-app-layout>
