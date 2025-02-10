@@ -104,4 +104,14 @@ class InvoiceController extends Controller
         $year = date('Y');  
         return sprintf('%03d/JSD/INV/%s/%s', $userInput, $month, $year);  
     }
+
+    public function detail_invoice($id)
+    {
+        $invoice = Invoice::with(['details', 'proyek.client'])->where('id', $id)->firstOrFail();
+        return view('invoice.detail', compact('invoice'));
+        
+        if (!$invoice) {
+            return back()->with('error', 'Invoice tidak ditemukan.');
+    }
+}
 }

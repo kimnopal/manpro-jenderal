@@ -54,7 +54,7 @@
                             @csrf  
                             <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus?')"><i class="fa-solid fa-trash"></i> Hapus</button>  
                         </form>  
-                        <a href="{{ route('detail_invoice.index', $invoice->id) }}" class="btn btn-primary btn-sm"><i class="fa-solid fa-circle-info"></i> Detail</a>
+                        <a href="{{ route('detail.invoice', $invoice->id) }}" class="btn btn-primary btn-sm"><i class="fa-solid fa-circle-info"></i> Detail</a>
                     </td>  
                 </tr>  
             @endforeach  

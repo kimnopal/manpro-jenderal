@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 
 
@@ -22,7 +23,7 @@ class Invoice extends Model
         'catatan',  
     ];
 
-    public function client()  
+    public function client(): BelongsTo  
     {  
         return $this->belongsTo(Client::class);  
     } 
@@ -32,12 +33,12 @@ class Invoice extends Model
         return $this->hasMany(Kwitansi::class, 'invoice_id'); 
     }
 
-    public function detail() 
+    public function details(): HasMany 
     {
-        return $this->hasMany(InvoiceDetail::class); // Jika satu invoice punya banyak detail
+        return $this->hasMany(InvoiceDetail::class, 'invoice_id'); // Jika satu invoice punya banyak detail
     }
     
-    public function proyek()
+    public function proyek(): BelongsTo
     {
         return $this->belongsTo(Proyek::class);
     }
