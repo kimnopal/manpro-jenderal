@@ -64,5 +64,17 @@
         </tbody>
     </table>
     {{ $data_item->onEachSide(1)->links() }}
-    
+    @if (session('flash_message'))
+    @dump(session('flash_message'))
+        <script>
+            window.addEventListener('load', function () {
+                Swal.fire({
+                    title   : "{{ session('flash_type') }}",
+                    text    : "{{ session('flash_message') }}",
+                    icon    : 'success',
+                    showConfirmButton : true
+                })
+            })
+        </script>
+    @endif
 </x-app-layout>

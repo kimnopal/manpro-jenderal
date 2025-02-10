@@ -12,18 +12,18 @@
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
   
-            <!-- Pilih Client -->
-            <label for="client_id" class="form-label mt-3">Pilih Client yang bersangkutan</label>
-            <select name="client_id" id="client_id" class="form-select mt-2 @error('client_id') is-invalid @enderror">
-                <option value="" disabled>Pilih client</option>
-                @foreach ($data_client as $client)
-                    <option value="{{ $client->id }}" 
-                        @if ($invoice->client_id == $client->id) selected @endif>
-                        {{ $client->nama_client }}
+            <!-- Pilih Proyek -->
+            <label for="proyek_id" class="form-label mt-3">Pilih Proyek yang bersangkutan</label>
+            <select name="proyek_id" id="proyek_id" class="form-select mt-2 @error('proyek_id') is-invalid @enderror">
+                <option value="" disabled>Pilih Proyek</option>
+                @foreach ($data_proyek as $proyek)
+                    <option value="{{ $proyek->id }}" 
+                        @if (isset($invoice) && $invoice->proyek_id == $proyek->id) selected @endif>
+                        {{ $proyek->no_proyek }}
                     </option>
                 @endforeach
             </select>
-            @error('client_id')
+            @error('proyek_id')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
 

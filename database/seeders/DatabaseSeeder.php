@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Bank;
 use App\Models\Client;
+use App\Models\Invoice;
 use App\Models\Item;
 use App\Models\pembelian;
 use App\Models\Proyek;
@@ -53,5 +54,6 @@ class DatabaseSeeder extends Seeder
         Client::factory(30)->create();
         Proyek::factory(20)->create();
         pembelian::factory(30)->create();
+        Invoice::factory(20)->create();
     }
 }

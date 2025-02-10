@@ -29,4 +29,9 @@ class Proyek extends Model
     public function client(): BelongsTo {
         return $this->belongsTo(Client::class, 'klien_id');
     }
+
+    public function invoice(): HasMany
+    {
+        return $this->hasMany(Invoice::class, 'proyek_id');
+    }
 }

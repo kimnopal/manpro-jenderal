@@ -16,6 +16,7 @@
             <tr>  
                 <th width="5%">No.</th>  
                 <th width="12%">No Invoice</th>  
+                <th width="15%">No Proyek</th>
                 <th width="15%">Client</th>  
                 <th width="19%">Tanggal</th>  
                 <th>Catatan</th>  
@@ -24,28 +25,36 @@
         </thead>  
         <tbody class="table-group-divider">  
             @php
-            $i = 1
+            $i = $i = ($data_invoice->currentPage() - 1) * $data_invoice->perPage() + 1
             @endphp
             @foreach($data_invoice as $invoice)  
                 <tr>  
                     <td>{{ $i++ }}</td>  
                     <td>{{ $invoice->no_invoice }}</td>  
                     <td>
-                        @if ($invoice->client_id)
-                            {{ $invoice->client->nama_client }}
+                        @if ($invoice->proyek_id)
+                            {{ $invoice->proyek->no_proyek }}
                         @else
                             Tidak Ada Data
                         @endif
-                    </td>  
+                    </td>
+                    <td>
+                        @if ($invoice->proyek_id)
+                            {{ $invoice->proyek->client->nama_client }}
+                        @else
+                            Tidak Ada Data
+                        @endif
+                    </td> 
                     <td>{{ \Carbon\Carbon::parse($invoice->tanggal)->translatedFormat('l, j F Y') }}</td>  
                     <td>{{ $invoice->catatan }}</td>  
                     <td>  
                         <a href="{{ route('invoice.edit-invoice', $invoice->id) }}" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen"></i> Edit</a>  
-                        <form action="{{ route('invoice.delete', $invoice->id) }}" method="GET" style="display:inline;">  
+                        <form action="{{ route('invoice.delete', $invoice->id) }}" method="POST" style="display:inline;">  
+                            @method('delete')
                             @csrf  
                             <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus?')"><i class="fa-solid fa-trash"></i> Hapus</button>  
                         </form>  
-                        <a href="{{ route('invoice_detail.index', $invoice->id) }}" class="btn btn-primary btn-sm"><i class="fa-solid fa-circle-info"></i> Detail</a>
+                        <a href="{{ route('detail.invoice', $invoice->id) }}" class="btn btn-primary btn-sm"><i class="fa-solid fa-circle-info"></i> Detail</a>
                     </td>  
                 </tr>  
             @endforeach  

@@ -1,28 +1,47 @@
-<x-app-layout>  
-    <div class="mt-3">  
-        <h4>Edit Detail Invoice</h4>  
-        <form action="{{ route('invoice_detail.update', $invoiceDetail->id) }}" method="POST" class="mt-3 border border-2 rounded p-4 bg-warning bg-opacity-25">  
-            @csrf  
-            @method('PUT')  
-  
-            <label for="invoice_id" class="form-label">Invoice ID:</label>  
-            <input type="number" name="invoice_id" class="form-control mb-2" value="{{ $invoiceDetail->invoice_id }}" required>  
-  
-            <label for="deskripsi" class="form-label">Deskripsi:</label>  
-            <input type="text" name="deskripsi" class="form-control mb-2" value="{{ $invoiceDetail->deskripsi }}" required>  
-  
-            <label for="harga" class="form-label">Harga:</label>  
-            <input type="number" name="harga" class="form-control mb-2" value="{{ $invoiceDetail->harga }}" required>  
-  
-            <label for="qty" class="form-label">Qty:</label>  
-            <input type="number" name="qty" class="form-control mb-2" value="{{ $invoiceDetail->qty }}" required>  
-  
-            <label for="total" class="form-label">Total:</label>  
-            <input type="number" name="total" class="form-control mb-2" value="{{ $invoiceDetail->total }}" required>  
-  
-            <button class="btn btn-success mt-3" type="submit">  
-                <i class="fa-solid fa-save"></i> Simpan Perubahan  
-            </button>  
-        </form>  
-    </div>  
-</x-app-layout>  
+<x-app-layout>
+    <div class="container mt-4">
+        <div class="card shadow-lg">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Edit Detail Invoice</h4>
+            </div>
+            <div class="card-body">
+                <form action="{{ route('invoice_detail.update', $detail->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+
+                    <input type="hidden" name="invoice_id" value="{{ $detail->no_invoice }}">
+
+                    <div class="mb-3">
+                        <label for="deskripsi" class="form-label">Deskripsi</label>
+                        <textarea name="deskripsi" id="deskripsi" class="form-control @error('deskripsi') is-invalid @enderror" required>{{ trim($detail->deskripsi) }}</textarea>
+                        @error('deskripsi')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="harga" class="form-label">Harga</label>
+                        <input type="number" name="harga" id="harga" class="form-control @error('harga') is-invalid @enderror" value="{{ $detail->harga }}" required>
+                        @error('harga')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="qty" class="form-label">Qty</label>
+                        <input type="number" name="qty" id="qty" class="form-control @error('qty') is-invalid @enderror" value="{{ $detail->qty }}" required>
+                        @error('qty')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="d-grid">
+                        <button class="btn btn-success" type="submit">
+                            <i class="fa-solid fa-save"></i> Simpan Perubahan
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</x-app-layout>

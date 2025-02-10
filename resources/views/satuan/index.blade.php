@@ -52,5 +52,28 @@
         </tbody>
     </table>
     {{ $data_satuan->onEachSide(1)->links() }}
-    
+    @if (session('flash_message'))
+        <script>
+            window.addEventListener('load', function () {
+                Swal.fire({
+                    title   : "{{ session('flash_type') }}",
+                    text    : "{{ session('flash_message') }}",
+                    icon    : 'success',
+                    showConfirmButton : true
+                })
+            })
+        </script>
+    @endif
+    @if (session('delete_error'))
+        <script>
+            window.addEventListener('load', function () {
+                Swal.fire({
+                    title   : 'Tidak Dapat Dihapus',
+                    text    : "{{ session('delete_error') }}",
+                    icon    : 'error',
+                    showConfirmButton : true
+                })
+            })
+        </script>
+    @endif
 </x-app-layout>
