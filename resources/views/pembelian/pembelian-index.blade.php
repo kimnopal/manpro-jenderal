@@ -21,12 +21,12 @@
             <th>Action</th>
         </thead>
         <tbody class="table-group-divider">
-            @php
+            {{-- @php
             $i=1;
-            @endphp
+            @endphp --}}
             @foreach ($data_pembelian as $pembelian)
                 <tr>
-                    <td>{{ $i++ }}</td>
+                    <td>{{ $loop->iteration + $data_pembelian->firstItem() - 1}}</td>
                     <td>{{ $pembelian->proyek->no_proyek }}</td>
                     <td>{{ $pembelian->qty }}</td>
                     <td>{{ $pembelian->satuan->nama_satuan }}</td>

@@ -5,7 +5,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Builder;
-
 class pembelian extends Model
 {
     use HasFactory;
@@ -20,9 +19,22 @@ class pembelian extends Model
     public function satuan() : BelongsTo{
         return $this->belongsTo(Satuan::class, 'satuanid');
     }
-    public function scopeFilterNama(Builder $query) : void {
+    public function scopeFilterPembelian(Builder $query) : void {
+        
         
         $query
-        ->where('proyekid', 'like', '%'.\request('search_pembelian').'%');
+        ->whereHas('supplier', function ($supplier_query) {
+            $supplier_query->where('nama_supplier', 'like', '%'.request('search_pembelian').'%');
+            })
+        ->orWhereHas('satuan', function ($satuan_query) {
+            $satuan_query->where('nama_satuan', 'like', '%'.\request('search_pembelian').'%');
+            })
+        ->orWhereHas('proyek', function ($proyek_query) {
+            $proyek_query->where('no_proyek', 'like', '%'.\request('search_pembelian').'%');
+            })
+        ->orWhere('qty', 'like', '%'.\request('search_pembelian').'%')
+        ->orWhere('hargabeli', 'like', '%'.\request('search_pembelian').'%')
+        ;
+
     }
 }
