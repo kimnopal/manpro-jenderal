@@ -18,7 +18,7 @@ class ProyekFactory extends Factory
     public function definition(): array
     {
         return [
-            'no_proyek' => $this->faker->randomNumber(3) .'/JSD/I/2025',
+            'no_proyek' => $this->faker->unique()->randomNumber(3) .'/JSD/I/2025',
             'tgl_mulai_kontrak' => $this->faker->date(),
             'tgl_selesai_kontrak' => $this->faker->date(),
             // 'klien_id' => Client::factory(),

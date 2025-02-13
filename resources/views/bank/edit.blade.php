@@ -16,4 +16,16 @@
         @enderror
         <button class="btn btn-success mt-3"><i class="fa-solid fa-save"></i> Simpan Perubahan</button>
     </form>
+    @if (session('update_error'))
+        <script>
+            window.addEventListener('load', function () {
+                Swal.fire({
+                    title   : "{{ session('update_error') }}",
+                    text    : "{{ session('error_message') }}",
+                    icon    : 'error',
+                    showConfirmButton : true
+                })
+            })
+        </script>
+    @endif
 </x-app-layout>

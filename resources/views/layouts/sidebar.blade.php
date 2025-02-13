@@ -1,7 +1,7 @@
-<div class="ps-3 py-4" style="width: 230px;">
-    <a href="{{ route('dashboard') }}" class="d-flex align-items-center justify-content-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
-        {{-- <svg class="bi pe-none me-2" width="30" height="24"><use xlink:href="#bootstrap"/></svg> --}}
-        <span class="fs-5 fw-semibold text-center">Manpro Jenderal</span>
+<div class="flex-shrink-0 p-3 ps-0 position-sticky vh-100 ms-0">
+    <a href="{{ route('dashboard') }}" class="d-flex align-items-center mb-3 link-body-emphasis text-decoration-none border-bottom">
+        <svg class="bi pe-none me-2" width="10" height="24"><use xlink:href="#bootstrap"/></svg>
+        <span class="fs-4 fw-semibold">Manpro Jenderal</span>
     </a>
     <ul class="list-unstyled ps-0">
         @php

@@ -17,11 +17,11 @@ class pembelianFactory extends Factory
     public function definition(): array
     {
         return [
-            'proyekid' => 2,
+            'proyekid' => $this->faker->numberBetween(1,20),
             'qty' => $this->faker->randomNumber(2),
-            'satuanid' => 4,
+            'satuanid' => $this->faker->numberBetween(1,10),
             'hargabeli' => $this->faker->numberBetween(10,20)*100000,
-            'supplierid' => 4,
+            'supplierid' => $this->faker->numberBetween(1,30),
         ];
     }
 }

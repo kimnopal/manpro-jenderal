@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('invoice', function (Blueprint $table) {
             $table->id();
             $table->string('no_invoice')->unique();
-            $table->foreignId('client_id')
-                    ->constrained('client')
+            $table->foreignId('proyek_id')
+                    ->constrained('proyek')
                     ->cascadeOnUpdate();
             $table->date('tanggal');
             $table->string('catatan');

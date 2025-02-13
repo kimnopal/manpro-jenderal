@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 class PembelianController extends Controller
 {
     public function pembelian_main() {
-        $data_pembelian = pembelian::with(['satuan', 'proyek', 'supplier'])->filternama()->paginate(10);
+        $data_pembelian = pembelian::with(['proyek', 'satuan', 'supplier'])->filterpembelian()->paginate(10);
 
         return \view('pembelian.pembelian-index',[
         'judul_pembelian_index' => 'List Data Pembelian',
@@ -73,6 +73,9 @@ class PembelianController extends Controller
         $pembelian = pembelian::find($id);
         $pembelian->qty = $request -> qty;
         $pembelian->satuanid = $request -> satuanid;
+        $pembelian->proyekid = $request -> proyekid;
+        $pembelian->supplierid = $request -> supplierid;
+        $pembelian->hargabeli = $request -> hargabeli;
         $pembelian -> save();
         return redirect::route('pembelian.pembelian-index');
     }

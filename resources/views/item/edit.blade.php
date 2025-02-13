@@ -91,6 +91,16 @@
             </div>
         </div>        
     </div>
-
-    
+    @if (session('flash_message'))
+        <script>
+            window.addEventListener('load', function () {
+                Swal.fire({
+                    title   : "{{ session('flash_type') }}",
+                    text    : "{{ session('flash_message') }}",
+                    icon    : 'success',
+                    showConfirmButton : true
+                })
+            })
+        </script>
+    @endif
 </x-app-layout>
