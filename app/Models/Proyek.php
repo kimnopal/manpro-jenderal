@@ -13,6 +13,17 @@ class Proyek extends Model
     use HasFactory;
     protected $table = 'proyek';
 
+    protected $fillable = [
+        'no_proyek',
+        'tgl_mulai_kontrak',
+        'tgl_selesai_kontrak',
+        'klien_id',
+        'termin',
+        'biaya',
+        'pajak',
+        'biaya_lain'
+    ];
+
     public function pembelians() : HasMany{
         return $this->hasMany(pembelian::class, 'proyekid');
     }
@@ -21,9 +32,8 @@ class Proyek extends Model
         $query
         ->whereHas('client', function ($proyek_query) {
             $proyek_query->where('nama_client', 'like', '%'.request('search_proyek').'%');
-            })
-        ->orWhere('no_proyek', 'like', '%'.\request('search_proyek').'%');
-        ;
+        })->orWhere('no_proyek', 'like', '%'.\request('search_proyek').'%');
+
     }
 
     public function client(): BelongsTo {
