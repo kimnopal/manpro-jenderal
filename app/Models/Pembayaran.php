@@ -9,12 +9,17 @@ class Pembayaran extends Model
     protected $table = 'pembayaran';  
   
     protected $fillable = [  
-        'id_proyek',  
-        'status',  
-        'nominal',  
+        'invoice_id',
+        'termin_no',
+        'status',
+        'nominal',
         'kode_pembayaran',  
     ];  
-  
+    public function pembayaran()
+    {
+        return $this->belongsTo(Invoice::class);
+    }
+    
     // public function proyek()  
     // {  
     //     return $this->belongsTo(Proyek::class, 'id_proyek');  

@@ -43,6 +43,11 @@ class Invoice extends Model
         return $this->belongsTo(Proyek::class);
     }
     
+    public function pembayaran(): HasMany  
+    {  
+        return $this->hasMany(Pembayaran::class, 'invoice_id'); 
+    }
+
     public function scopeFilterInvoice(Builder $query) : void {
         
         $query

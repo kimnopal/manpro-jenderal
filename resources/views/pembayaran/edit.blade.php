@@ -1,13 +1,14 @@
 <x-app-layout>  
     <div class="container mt-5">  
         <h4 class="mb-4">Edit Pembayaran</h4>  
-        <form action="{{ route('pembayaran.update', $pembayaran->id) }}" method="POST" class="border border-2 rounded p-4 bg-warning bg-opacity-25 shadow">  
+        <form action="{{ route('pembayaran.update', ['invoice_id' => $pembayaran->invoice_id, 'id' => $pembayaran->id]) }}" method="POST" class="border border-2 rounded p-4 bg-warning bg-opacity-25 shadow">  
             @csrf  
             @method('PUT')
               
             <div class="mb-3">  
-                <label for="id_proyek" class="form-label">Proyek ID:</label>  
-                <input type="text" name="id_proyek" class="form-control" value="{{ $pembayaran->id_proyek }}" placeholder="Masukkan ID Proyek" autofocus required>  
+            <label for="termin_no" class="form-label">Termin ke-</label>
+                <input type="number" class="form-control" id="termin_no" name="termin_no" 
+                    value="{{ old('termin_no', $pembayaran->termin_no) }}" min="1" required>
             </div>  
   
             <div class="mb-3">  

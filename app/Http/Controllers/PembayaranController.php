@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Invoice;
 use App\Models\Pembayaran;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
@@ -9,57 +10,80 @@ use Illuminate\Http\Request;
 
 class PembayaranController extends Controller
 {
-    public function index_pembayaran() {
-        $data_pembayaran = Pembayaran::all();
+    // public function index_pembayaran() {
+    //     $data_pembayaran = Pembayaran::all();
 
-        return \view('pembayaran.index', [
-            'judul_index_pembayaran' => 'List Data pembayaran',
-            'data_pembayaran' => $data_pembayaran,
-        ]);
-    }
+    //     return \view('pembayaran.index', [
+    //         'judul_index_pembayaran' => 'List Data pembayaran',
+    //         'data_pembayaran' => $data_pembayaran,
+    //     ]);
+    // }
     
-    public function create_pembayaran() {
+    public function create_pembayaran($invoice_id)
+    {
+        $invoice = Invoice::findOrFail($invoice_id);
+        return view('pembayaran.create', compact('invoice'));
+    }
+
+    public function save_pembayaran(Request $request, $invoice_id)
+    {
+        $invoice = Invoice::findOrFail($invoice_id);
+
+        $validated = $request->validate([
+            'invoice_id' => 'required|exists:invoice,id',
+            'termin_no' => 'required|integer|min:1',
+            'nominal' => 'required|numeric|min:1',
+            'status' => 'required|in:unpaid,paid,pending',
+            'kode_pembayaran' => 'nullable|string|max:255'
+        ]);
+
+        Pembayaran::create($validated);
+
+        return Redirect::route('detail.invoice', ['id' => $invoice_id])
+            ->with('success', 'Termin pembayaran berhasil ditambahkan!');
+    }
+
+    public function edit_pembayaran($invoice_id, $id)
+    {
+        // Dapatkan data invoice
+        $invoice = Invoice::findOrFail($invoice_id);
         
-        return \view('pembayaran.create', [
-            'judul_create_pembayaran' => 'Tambah Data pembayaran'
-        ]);
+        // Dapatkan data pembayaran yang terkait dengan invoice tersebut
+        $pembayaran = Pembayaran::where('invoice_id', $invoice_id)
+                        ->findOrFail($id);
+                        
+        // Kirim semua data yang diperlukan ke view
+        return view('pembayaran.edit', compact('invoice', 'pembayaran'));
     }
 
-    public function save_pembayaran(Request $request) : RedirectResponse {
-        $pembayaran = new Pembayaran();
-        $pembayaran->id_proyek = $request->id_proyek;
-        $pembayaran->status = $request->status;
-        $pembayaran->nominal = $request->nominal;  
-        $pembayaran->kode_pembayaran = $request->kode_pembayaran;
-        $pembayaran->save();
+// UPDATE Data
+public function update_pembayaran(Request $request, $invoice_id, $id)
+{
+    $validated = $request->validate([
+        'termin_no' => 'required|integer|min:1',
+        'nominal' => 'required|numeric|min:0',
+        'status' => 'required|in:paid,unpaid,pending',
+        'kode_pembayaran' => 'nullable|string|max:255'
+    ]);
 
-        return Redirect::route('pembayaran.index');
-    }
+    $pembayaran = Pembayaran::where('invoice_id', $invoice_id)
+                    ->findOrFail($id);
+                    
+    $pembayaran->update($validated);
 
-    public function edit_pembayaran($id) {
-        $pembayaran = Pembayaran::find($id);
+    return redirect()->route('detail.invoice', $invoice_id)
+        ->with('success', 'Pembayaran berhasil diperbarui!');
+}
 
-        return \view('pembayaran.edit', [
-            'judul_edit_pembayaran' => 'Edit Data pembayaran',
-            'pembayaran' => $pembayaran,
-        ]);
-    }
+// DELETE Data
+    public function delete_pembayaran($id)
+    {
+        $pembayaran = pembayaran::findOrFail($id);
+        $invoice_id = $pembayaran->invoice_id;
 
-    public function update_pembayaran(Request $request, $id) : RedirectResponse {
-        $pembayaran = Pembayaran::find($id);
-        $pembayaran->id_proyek = $request->id_proyek;
-        $pembayaran->status = $request->status;
-        $pembayaran->nominal = $request->nominal;  
-        $pembayaran->kode_pembayaran = $request->kode_pembayaran;
-        $pembayaran->save();
-
-        return Redirect::route('pembayaran.index');
-    }
-
-    public function delete_pembayaran($id) : RedirectResponse {
-        $pembayaran = Pembayaran::find($id);
         $pembayaran->delete();
 
-        return Redirect::route('pembayaran.index');
+        return Redirect::route('detail.invoice', $invoice_id)
+            ->with('success', 'Termin pembayaran berhasil dihapus!');
     }
 }
