@@ -110,6 +110,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/invoice/{invoice_id}/pembayaran/{id}/edit', [PembayaranController::class, 'edit_pembayaran'])->name('pembayaran.edit');
     Route::put('/invoice/{invoice_id}/pembayaran/{id}/update', [PembayaranController::class, 'update_pembayaran'])->name('pembayaran.update');
     Route::delete('/pembayaran/{id}/delete/', [PembayaranController::class, 'delete_pembayaran'])->name('pembayaran.delete');
+    Route::get('/invoice/{invoice_id}/pembayaran/{id}/print', [PembayaranController::class, 'print'])->name('pembayaran.print');
 
     //CRUD KWITANSI
     Route::get('/kwitansi', [KwitansiController::class, 'index_kwitansi'])->name('kwitansi.index');

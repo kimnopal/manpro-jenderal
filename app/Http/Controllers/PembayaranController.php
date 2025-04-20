@@ -86,4 +86,22 @@ public function update_pembayaran(Request $request, $invoice_id, $id)
         return Redirect::route('detail.invoice', $invoice_id)
             ->with('success', 'Termin pembayaran berhasil dihapus!');
     }
+
+    public function print($invoice_id, $id)
+{
+    // Validasi invoice exists
+    $invoice = Invoice::findOrFail($invoice_id);
+    
+    // Get payment data and validate it belongs to invoice
+    $pembayaran = Pembayaran::where('invoice_id', $invoice_id)
+                    ->findOrFail($id);
+    
+    // Load relationships
+    $invoice->load(['proyek.client', 'details']);
+    
+    return view('pembayaran.print', [
+        'invoice' => $invoice,
+        'pembayaran' => $pembayaran
+    ]);
+}
 }

@@ -19,7 +19,12 @@ class Pembayaran extends Model
     {
         return $this->belongsTo(Invoice::class);
     }
-    
+
+    public function getTanggalBayarFormattedAttribute()
+    {
+        return $this->tanggal_bayar ? \Carbon\Carbon::parse($this->tanggal_bayar)->format('d/m/Y') : '-';
+    }
+
     // public function proyek()  
     // {  
     //     return $this->belongsTo(Proyek::class, 'id_proyek');  
