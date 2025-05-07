@@ -11,10 +11,6 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Register any application services.
      */
-    public function register(): void
-    {
-        //
-    }
 
     /**
      * Bootstrap any application services.
@@ -28,4 +24,6 @@ class AppServiceProvider extends ServiceProvider
        setlocale(LC_TIME, 'id_ID.UTF-8'); // Mengatur locale ke Bahasa Indonesia  
        Carbon::setLocale('id'); // Mengatur locale Carbon  
     }
+
+    
 }

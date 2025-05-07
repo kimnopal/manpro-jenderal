@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Terbilang;
+use App\Models\Invoice;
 use App\Models\Client;
 use App\Models\Kwitansi;
 use Illuminate\Http\Request;
@@ -11,7 +13,7 @@ use Illuminate\Http\RedirectResponse;
 class KwitansiController extends Controller
 {
     public function index_kwitansi() {  
-        $data_kwitansi = Kwitansi::with(['client'])->filterKwitansi()->paginate(10);  
+        $data_kwitansi = Kwitansi::with(['invoice'])->filterKwitansi()->paginate(10);  
       
         return \view('kwitansi.index', [  
             'judul_index_kwitansi' => 'List Data Kwitansi',  
@@ -21,24 +23,36 @@ class KwitansiController extends Controller
       
     
   
-    public function create_kwitansi() {  
-        $data_client = Client::all();
+    public function create_kwitansi()
+    {
+        $data_invoice = Invoice::with('proyek.client')->get();
 
-        return \view('kwitansi.create', [  
-            'judul_create_kwitansi' => 'Tambah Data Kwitansi',
-            'data_client' => $data_client,
-        ]);  
-    }  
+        return view('kwitansi.create', [
+            'data_invoice' => $data_invoice
+        ]);
+    } 
   
     public function save_kwitansi(Request $request) : RedirectResponse {  
+        
+
         $validated = $request->validate([
-            'client_id' => 'required|exists:client,id',
-            'total' => 'required',
-            'tanggal' => 'required'
+            'no_kwitansi' => 'required|unique:kwitansi,no_kwitansi',
+            'invoice_id' => 'required|exists:invoice,id',
+            'total' => 'required|numeric',
+            'tanggal' => 'required|date'
         ]);
 
+        $userInput = intval($request->no_kwitansi); // Pastikan ini adalah angka  
+        $kwitansiNumber = $this->generateKwitansiNumber($userInput);  
+    
+        $existingKwitansi = Kwitansi::where('no_kwitansi', $kwitansiNumber)->first();  
+        if ($existingKwitansi) {  
+            return redirect()->back()->withErrors(['no_kwitansi' => 'No Kwitansi sudah ada.'])->withInput();  
+        }  
+
         $kwitansi = new Kwitansi();  
-        $kwitansi->client_id= $request->client_id;  
+        $kwitansi->no_kwitansi = $kwitansiNumber;  
+        $kwitansi->invoice_id = $request->invoice_id;  
         $kwitansi->total = $request->total;  
         $kwitansi->tujuan = $request->tujuan;  
         $kwitansi->tanggal = $request->tanggal;  
@@ -49,12 +63,12 @@ class KwitansiController extends Controller
   
     public function edit_kwitansi($id) {  
         $kwitansi = Kwitansi::find($id);  
-        $data_client = Client::all();
-  
+        $data_invoice = Invoice::with('proyek.client')->get();
+
         return \view('kwitansi.edit', [  
             'judul_edit_kwitansi' => 'Edit Data Kwitansi',  
             'kwitansi' => $kwitansi,  
-            'data_client' => $data_client
+            'data_invoice' => $data_invoice
         ]);  
     }  
   
@@ -62,12 +76,19 @@ class KwitansiController extends Controller
         $kwitansi = Kwitansi::findOrFail($id);
 
         $validated = $request->validate([
-            'client_id' => 'required|exists:client,id',
+            'no_kwitansi' => 'required|unique:kwitansi,no_kwitansi,' . $kwitansi->id, 
+            'invoice_id' => 'required|exists:invoice,id',
             'total' => 'required',
             'tanggal' => 'required'
         ]);
 
-        $kwitansi->client_id = $request->client_id;  
+        $userInput = intval($request->no_kwitansi);  
+        $month = date('m');  
+        $year = date('Y');  
+        $newKwitansiNumber = sprintf('%03d/JSD/KWT/%s/%s', $userInput, $month, $year); 
+
+        $kwitansi->no_kwitansi = $newKwitansiNumber;
+        $kwitansi->invoice_id = $request->invoice_id;  
         $kwitansi->total = $request->total;  
         $kwitansi->tujuan = $request->tujuan;  
         $kwitansi->tanggal = $request->tanggal;  
@@ -83,10 +104,17 @@ class KwitansiController extends Controller
         return Redirect::route('kwitansi.index');  
     }  
 
-    public function print_kwitansi($id)  {  
-    $kwitansi = Kwitansi::findOrFail($id); // Mengambil data kwitansi berdasarkan ID  
-  
-    return view('kwitansi.print', compact('kwitansi')); // Mengembalikan view untuk mencetak  
-    }  
+    public function generateKwitansiNumber($userInput) {   
+        $month = date('m');  
+        $year = date('Y');  
+        return sprintf('%03d/JSD/KWT/%s/%s', $userInput, $month, $year);  
+    }
+    public function print_kwitansi($id) 
+{
+    $kwitansi = Kwitansi::with(['invoice.proyek.client', 'invoice.pembayaran'])
+                  ->findOrFail($id);
+    
+    return view('kwitansi.print', compact('kwitansi'));
+} 
 
 }

@@ -9,18 +9,26 @@
                     @method('post')
                     @csrf
 
-                    <!-- Client -->
                     <div class="mb-3">
-                        <label for="client_id" class="form-label">Client:</label>
-                        <select name="client_id" id="client_id" class="form-select @error('client_id') is-invalid @enderror" required>
-                            <option value="" selected disabled>Pilih Client yang bersangkutan</option>
-                            @foreach ($data_client as $client)
-                                <option value="{{ $client->id }}">{{ $client->nama_client }}</option>
-                            @endforeach
-                        </select>
-                        @error('client_id')
+                        <label for="no_kwitansi" class="form-label">No kwitansi:</label>
+                        <input type="text" name="no_kwitansi" id="no_kwitansi" class="form-control @error('no_kwitansi') is-invalid @enderror" maxlength="3" pattern="\d{3}" title="Harap masukkan tepat 3 angka." required>
+                        @error('no_kwitansi')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="invoice_id" class="form-label">Pilih Invoice:</label>
+                        <select name="invoice_id" class="form-select" required>
+                            <option value="" disabled selected>-- Pilih Invoice --</option>
+                            @foreach($data_invoice as $invoice)
+                                <option value="{{ $invoice->id }}">
+                                    [{{ $invoice->no_invoice }}] - 
+                                    {{ $invoice->proyek->client->nama_client }} - 
+                                    Proyek: {{ $invoice->proyek->no_proyek }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <!-- Total -->

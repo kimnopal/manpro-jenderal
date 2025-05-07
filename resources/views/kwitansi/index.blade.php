@@ -15,7 +15,8 @@
     <table class="table table-bordered table-stripped mt-3">    
         <thead class="table-success">    
             <tr>    
-                <th width="5%">No.</th>  
+                <th width="5%">No.</th>
+                <th width="20%">No. Kwitansi</th>
                 <th width="12%">Client</th>    
                 <th width="15%">Total</th>    
                 <th>Tujuan</th>    
@@ -30,9 +31,10 @@
             @foreach($data_kwitansi as $kwitansi)    
                 <tr>  
                     <td>{{ $i++ }}</td>   
+                    <td>{{ $kwitansi->no_kwitansi }}</td>
                     <td>
-                        @if ($kwitansi->client_id)
-                            {{ $kwitansi->client->nama_client }}
+                        @if ($kwitansi->invoice_id)
+                            {{ $kwitansi->invoice->proyek->client->nama_client }}
                         @else
                             Tidak Ada Data
                         @endif

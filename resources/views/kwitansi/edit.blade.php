@@ -5,17 +5,25 @@
             @csrf  
             @method('PUT')  
 
-            <label for="client_id" class="form-label mt-3">Pilih Client yang bersangkutan</label>
-            <select name="client_id" id="client_id" class="form-select mt-2 @error('client_id') is-invalid @enderror">
-                <option value="" disabled>Pilih client</option>
-                @foreach ($data_client as $client)
-                    <option value="{{ $client->id }}" 
-                        @if ($kwitansi->client_id == $client->id) selected @endif>
-                        {{ $client->nama_client }}
+            <label for="no_kwitansi" class="form-label">No Kwitansi:</label>  
+            <input type="text" name="no_kwitansi" class="form-control mb-2 @error('no_kwitansi') is-invalid @enderror" value="{{ $kwitansi->no_kwitansi }}" required>  
+            @error('no_kwitansi')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+
+            <label for="invoice_id" class="form-label mt-3">Pilih invoice yang bersangkutan</label>
+            <select name="invoice_id" id="invoice_id" class="form-select mt-2 @error('invoice_id') is-invalid @enderror">
+                <option value="" disabled>Pilih invoice</option>
+                @foreach ($data_invoice as $invoice)
+                    <option value="{{ $invoice->id }}" 
+                        @if ($kwitansi->invoice_id == $invoice->id) selected @endif>
+                        [{{ $invoice->no_invoice }}] - 
+                        {{ $invoice->proyek->client->nama_client }} - 
+                        Proyek: {{ $invoice->proyek->no_proyek }}
                     </option>
                 @endforeach
             </select>
-            @error('client_id')
+            @error('invoice_id')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
 
