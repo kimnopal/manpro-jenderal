@@ -107,7 +107,7 @@ class InvoiceController extends Controller
 
     public function detail_invoice($id)
     {
-        $invoice = Invoice::with(['details', 'proyek.client'])->where('id', $id)->firstOrFail();
+        $invoice = Invoice::with(['details', 'proyek.client', 'pembayaran'])->where('id', $id)->firstOrFail();
         return view('invoice.detail', compact('invoice'));
         
         if (!$invoice) {

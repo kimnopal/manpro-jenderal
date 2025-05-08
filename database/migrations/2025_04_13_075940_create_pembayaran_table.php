@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('pembayaran', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_proyek');
+            $table->integer('termin_no');
+            $table->foreignId('invoice_id')
+                ->references('id')->on('invoice')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
             $table->enum('status', ['paid', 'unpaid', 'pending'])->default('unpaid');
             $table->integer('nominal');
             $table->string('kode_pembayaran');

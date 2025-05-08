@@ -104,12 +104,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/proyek/hapus/{id}', [ProyekController::class, 'hapus_proyek'])->name('proyek.hapus');
 
     //CRUD PEMBAYARAN
-    Route::get('/pembayaran', [PembayaranController::class, 'index_pembayaran'])->name('pembayaran.index');
-    Route::get('/pembayaran/create-pembayaran', [PembayaranController::class, 'create_pembayaran'])->name('pembayaran.create-pembayaran');
-    Route::post('/pembayaran/save', [PembayaranController::class, 'save_pembayaran'])->name('pembayaran.save');
-    Route::get('/pembayaran/edit-pembayaran/{id}', [PembayaranController::class, 'edit_pembayaran'])->name('pembayaran.edit-pembayaran');
-    Route::put('/pembayaran/update/{id}', [PembayaranController::class, 'update_pembayaran'])->name('pembayaran.update');
-    Route::get('/pembayaran/delete/{id}', [PembayaranController::class, 'delete_pembayaran'])->name('pembayaran.delete');
+    // Route::get('/pembayaran', [PembayaranController::class, 'index_pembayaran'])->name('pembayaran.index');
+    Route::get('/invoice/{invoice_id}/pembayaran/create/', [PembayaranController::class, 'create_pembayaran'])->name('pembayaran.create');
+    Route::post('/invoice/{invoice_id}/pembayaran/save/', [PembayaranController::class, 'save_pembayaran'])->name('pembayaran.save');
+    Route::get('/invoice/{invoice_id}/pembayaran/{id}/edit', [PembayaranController::class, 'edit_pembayaran'])->name('pembayaran.edit');
+    Route::put('/invoice/{invoice_id}/pembayaran/{id}/update', [PembayaranController::class, 'update_pembayaran'])->name('pembayaran.update');
+    Route::delete('/pembayaran/{id}/delete/', [PembayaranController::class, 'delete_pembayaran'])->name('pembayaran.delete');
+    Route::get('/invoice/{invoice_id}/pembayaran/{id}/print', [PembayaranController::class, 'print'])->name('pembayaran.print');
 
     //CRUD KWITANSI
     Route::get('/kwitansi', [KwitansiController::class, 'index_kwitansi'])->name('kwitansi.index');

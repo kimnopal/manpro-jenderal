@@ -43,6 +43,16 @@ class Invoice extends Model
         return $this->belongsTo(Proyek::class);
     }
     
+    public function pembayaran(): HasMany  
+    {  
+        return $this->hasMany(Pembayaran::class, 'invoice_id'); 
+    }
+
+    public function getTanggalFormattedAttribute()
+    {
+        return $this->tanggal ? \Carbon\Carbon::parse($this->tanggal)->format('d/m/Y') : '-';
+    }
+
     public function scopeFilterInvoice(Builder $query) : void {
         
         $query
