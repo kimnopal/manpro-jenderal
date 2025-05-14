@@ -66,10 +66,10 @@
         .watermark {
             position: absolute;
             opacity: 0.1;
-            font-size: 80px;
+            font-size: 180px;
             transform: rotate(-45deg);
-            top: 30%;
-            left: 20%;
+            top: 40%;
+            left: 35%;
             z-index: -1;
         }
         .no-print {
@@ -117,7 +117,8 @@
     <div class="info-box">
         <div class="info-item">
             <p><span class="info-label">Telah diterima dari</span>: {{ $kwitansi->invoice->proyek->client->nama_client }}</p>
-            <p><span class="info-label">Untuk pembayaran</span>: {{ $kwitansi->tujuan }}</p>
+            <p><span class="info-label">Alamat Client </span>: {{ $kwitansi->invoice->proyek->client->alamat_client }}</p>
+            <p><span class="info-label">Tujuan pembayaran</span>: {{ $kwitansi->tujuan }}</p>
         </div>
         <div class="info-item">
             <p><span class="info-label">No. Invoice</span>: {{ $kwitansi->invoice->no_invoice }}</p>
